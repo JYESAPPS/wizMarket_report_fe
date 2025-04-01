@@ -1,0 +1,130 @@
+/* @tailwind base; */
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
+@import url("https://cdn.jsdelivr.net/npm/pretendard/dist/web/static/pretendard.css");
+
+body {
+  font-family: "Pretendard", sans-serif;
+}
+
+
+
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Noto Sans KR", sans-serif;
+  font-family: "Pretendard", sans-serif;
+  /* font-size: 16px; */
+  font-optical-sizing: auto;
+  font-weight: <weight>;
+  font-style: normal;
+}
+
+#wrap {
+  width: 100%;
+  height: auto;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+
+ul,
+li {
+  list-stype: normal
+}
+
+input {
+  outline: none;
+}
+
+input,
+select {
+  display: block;
+}
+
+p {
+  /* cursor: default */
+  /* text-wrap: balance; */
+  /* text-wrap: pretty; */
+}
+
+a {
+  font-size: 14px;
+  color: #007aff;
+}
+
+button {
+  border: 0
+}
+
+p, div {
+  user-select: none;
+  outline: none;
+}
+
+
+/* Swiper */
+.swiper-button-next,
+.swiper-button-prev {
+  color: #000;
+  /* 네비게이션 버튼 색상 */
+  transform: scale(0.7);
+  /* 네비게이션 버튼 크기 조정 */
+}
+
+
+/* 페이지네이션 도트 색상 */
+#root .swiper-pagination-bullet {
+  background: gray;
+  /* 기본 bullet 색상 */
+  border-radius: 5px;
+  transition: 0.3s ease, transform 0.3s ease;
+  /* 배경색과 변형의 전환 추가 */
+}
+
+#root .swiper-pagination-bullet-active {
+  width: 30px;
+  /* 기본 bullet의 너비 */
+  height: 6px;
+  /* 기본 bullet의 높이 */
+  background: white;
+  /* 활성 bullet 색상 */
+  transform: scale(1.1);
+  /* 활성 bullet 크기 조정 */
+}
+
+body::-webkit-scrollbar {
+  width: 8px;
+}
+
+body::-webkit-scrollbar-thumb {
+  width: 8px;
+  background-color: #ddd;
+}
+
+#google_translate_box font {
+  font-size: 0.75rem;
+}
+
+#footer font {
+  font-size: 0.75rem;
+}
+
+/* ************************************************************************ */
+
+@layer components {
+  .div-underline {
+    @apply relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:block after:w-full after:h-[2px] after:bg-[#D9D9D9];
+  }
+}
+@layer components {
+  .div-underline-hotplace {
+    @apply relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:block after:w-full after:h-[2px] after:bg-[#9581FB];
+  }
+}
