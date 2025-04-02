@@ -30,7 +30,7 @@ const StorePromotion = ({ storeInfo, storeInfoRedux }) => {
     const handleLinkClick = (event, storeBusinessNumber) => {
         event.preventDefault();
 
-        const REPORT_URL = `${process.env.REACT_APP_ADS}/ads/temp/${storeBusinessNumber}`;
+        const REPORT_URL = `${process.env.REACT_APP_ADS}/ads/temp2/${storeBusinessNumber}`;
         setModalUrl(REPORT_URL);
         setIsModalOpen(true);
     };
