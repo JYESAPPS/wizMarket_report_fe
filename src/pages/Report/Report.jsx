@@ -387,20 +387,73 @@ const Report = React.memo(() => {
                         {renderSection(StoreInfo, 'storeInfo', { storeInfo: states.data.storeInfo, storeInfoRedux })}
                     </section>
 
+                    {/* ---매장 상세정보--- */}    
+                    {/* {!states.error.storeDescription && !states.loading.storeDescription && states.data.storeDescription?.length > 0 && (
+                        <section className="px-1 py-1">
+                            {renderSection(StoreDescription, 'storeDescription', { storeDescriptions: states.data.storeDescription })}
+                        </section>
+                    )} */}
+                    
+                    {/* ---입지점수--- */}
+                    <section className="px-1 py-1">
+                        {renderSection(LocInfoAvgJscore, 'locInfoAvgJscore', { locInfoAvgJscore: states.data.locInfoAvgJscore, storeInfoRedux })}
+                    </section>
+
+                    {/* <section className="px-1 py-1">
+                        {renderSection(StorePromotion, 'storeInfo', { storeInfo: states.data.storeInfo, storeInfoRedux })}
+                    </section> */}
+
+                    {/* ---유동인구--- */}
+                    <section className="px-1 py-1">
+                        {renderSection(LocInfoMovePop, 'locInfoMovePop', { locInfoMovePop: states.data.locInfoMovePop, storeInfoRedux })}
+                    </section>
+
+                    {/* ---지역 경제 특성--- */}
+                    <section className="px-1 py-1">
+                        {renderSection(PopulationJscore, 'population', { population: states.data.population, storeInfoRedux })}
+                    </section>
+
+                    {/* ---인구 분포--- */}
+                    <section className="px-1 py-1">
+                        {renderSection(Population, 'population', { population: states.data.population, storeInfoRedux })}
+                    </section>
+
+                    {/* ---주거 환경--- */}
+                    <section className="px-1 py-1">
+                        {renderSection(PopulationResidentWork, 'populationResidentWork', { populationResidentWork: states.data.populationResidentWork, storeInfoRedux })}
+                    </section>
+
+                    {/* ---중간 광고--- */}
+                    <section className="px-1 py-1">
+                        <Ad1 />
+                    </section>
+                    <section className="px-1 py-1">
+                        <Ad2 />
+                    </section>
+                    <section className="px-1 py-1">
+                        <Ad3 />
+                    </section>
+
+                    {/* ---실시간 교통상황--- */}
                     {states.data.roadEventInfo?.body?.items?.length > 0 && (
                         <section className="px-1 py-1">
                             {renderSection(RoadEventInfo, 'roadEventInfo', { roadEventInfo: states.data.roadEventInfo, storeInfoRedux })}
                         </section>
                     )}
 
-                    {!states.error.storeDescription && !states.loading.storeDescription && states.data.storeDescription?.length > 0 && (
-                        <section className="px-1 py-1">
-                            {renderSection(StoreDescription, 'storeDescription', { storeDescriptions: states.data.storeDescription })}
-                        </section>
-                    )}
-
+                    {/* ---핫플레이스--- */}
                     <section className="px-1 py-1">
-                        {renderSection(StorePromotion, 'storeInfo', { storeInfo: states.data.storeInfo, storeInfoRedux })}
+                        {renderSection(LocInfoHotPlace, 'locInfoHotPlace', { locInfoHotPlace: states.data.locInfoHotPlace, storeInfoRedux })}
+                    </section>
+
+                    {/* ---업종별 분포--- */}
+                    <section className="px-1 py-1">
+                        {renderSection(CommercialDistrictMainCategoryCount, 'commercialDistrictMainCategory', { commercialDistrictMainCategory: states.data.commercialDistrictMainCategory, storeInfoRedux })}
+                    </section>
+
+                    {/* ---우리 동네 매장 평균--- */}
+                    <section className="px-1 py-1">
+                        {renderSection(CommercialDistrict, 'commercialDistrict', { commercialDistrict: states.data.commercialDistrict, commercialDistrictJscore: states.data.commercialDistrictJscore, storeInfoRedux })}
                     </section>
 
                     <section className="px-1 py-1">
@@ -419,61 +472,31 @@ const Report = React.memo(() => {
                         </section>
                     ))}
 
-                    <section className="px-1 py-1">
-                        <Ad1 />
-                    </section>
+                    
 
-                    <section className="px-1 py-1">
-                        <Ad2 />
-                    </section>
-
-                    <section className="px-1 py-1">
-                        <Ad3 />
-                    </section>
-
-                    <section className="px-1 py-1">
-                        {renderSection(LocInfoAvgJscore, 'locInfoAvgJscore', { locInfoAvgJscore: states.data.locInfoAvgJscore, storeInfoRedux })}
-                    </section>
-
-                    <section className="px-1 py-1">
-                        {renderSection(Population, 'population', { population: states.data.population, storeInfoRedux })}
-                    </section>
+                    
 
                     {/* <section className="px-1 py-1">
                         {renderSection(LocInfoJScore, 'locInfo', { locInfo: states.data.locInfo, storeInfoRedux })}
                     </section> */}
 
-                    <section className="px-1 py-1">
-                        {renderSection(PopulationResidentWork, 'populationResidentWork', { populationResidentWork: states.data.populationResidentWork, storeInfoRedux })}
-                    </section>
+                    
 
-                    <section className="px-1 py-1">
-                        {renderSection(LocInfoMovePop, 'locInfoMovePop', { locInfoMovePop: states.data.locInfoMovePop, storeInfoRedux })}
-                    </section>
+                    
 
-                    <section className="px-1 py-1">
-                        {renderSection(PopulationJscore, 'population', { population: states.data.population, storeInfoRedux })}
-                    </section>
-
-                    <section className="px-1 py-1">
-                        {renderSection(LocInfoHotPlace, 'locInfoHotPlace', { locInfoHotPlace: states.data.locInfoHotPlace, storeInfoRedux })}
-                    </section>
+                    
 
                     <section className="px-1 py-1">
                         {renderSection(CommercialDistrictAvgJScore, 'commercialDistrictAvgJscore', { commercialDistrictAvgJscore: states.data.commercialDistrictAvgJscore, storeInfoRedux })}
                     </section>
 
-                    <section className="px-1 py-1">
-                        {renderSection(CommercialDistrictMainCategoryCount, 'commercialDistrictMainCategory', { commercialDistrictMainCategory: states.data.commercialDistrictMainCategory, storeInfoRedux })}
-                    </section>
+                    
 
                     {/* <section className="px-1 py-1">
                         // {renderSection(CommercialDistirctJScore, 'commercialDistrictJscore', { commercialDistrictJscore: states.data.commercialDistrictJscore, storeInfoRedux })}
                     </section> */}
 
-                    <section className="px-1 py-1">
-                        {renderSection(CommercialDistrict, 'commercialDistrict', { commercialDistrict: states.data.commercialDistrict, commercialDistrictJscore: states.data.commercialDistrictJscore, storeInfoRedux })}
-                    </section>
+                    
 
                     <section className="px-1 py-1">
                         {renderSection(CommercialDistrictWeekdaySales, 'commercialDistrictWeekdaySales', { commercialDistrictWeekdaySales: states.data.commercialDistrictWeekdaySales, storeInfoRedux })}

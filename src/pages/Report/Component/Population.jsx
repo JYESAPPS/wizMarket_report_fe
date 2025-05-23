@@ -165,7 +165,7 @@ const Population = ({ population, storeInfoRedux }) => {
                 </div>
             </div> */}
             <div className="">
-                {/* <div className="flex justify-center pt-4 pb-2">
+                <div className="flex justify-center pt-4 pb-2">
                     <div className="w-5 h-5">
                         <img className='w-full, h-auto' src="/assets/component/tip.png" alt="팁" />
                     </div>
@@ -173,7 +173,7 @@ const Population = ({ population, storeInfoRedux }) => {
                 <div className="">
                     <p className='text-base font-bold'>연령별 특성 및 응대방법</p>
                     <p>...</p>
-                </div> */}
+                </div>
             </div>
         </div>
     );

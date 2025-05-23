@@ -158,7 +158,7 @@ const CommercialDistrict = ({ commercialDistrict, commercialDistrictJscore, stor
             <div className="">
                 {/* <p className="text-md font-semibold py-4">{storeInfoRedux.sub_district_name} {storeInfoRedux.biz_detail_category_rep_name} 상권분석</p> */}
                 {/* <p className='text-md text-opacity-80 pb-4'>내 점포 사업 요약 <span className='text-xs text-opacity-80'>{formatDate(nice_biz_map_data_ref_date)}</span></p> */}
-                <p className='font-bold text-opacity-80 py-4'>우리 동네 {storeInfoRedux.biz_detail_category_rep_name}집은? <span className='text-xs font-normal text-black text-opacity-70'>{formatDate(nice_biz_map_data_ref_date)} 기준 자료</span></p>
+                <p className='font-bold text-opacity-80 py-4'>우리 동네 {storeInfoRedux.biz_detail_category_rep_name} 매장 평균 <span className='text-xs font-normal text-black text-opacity-70'>{formatDate(nice_biz_map_data_ref_date)} 기준 자료</span></p>
 
                 {/* <div>
                     {lowScores.length > 0 && highScores.length > 0 ? (
@@ -190,7 +190,7 @@ const CommercialDistrict = ({ commercialDistrict, commercialDistrictJscore, stor
             <div className="">
                 {showMainCustomers && (
                     <div className="py-4 text-right">
-                        <p className='text-md font-semibold text-black text-opacity-70'>{sub_district_name} {biz_detail_category_rep_name} 주요고객</p>
+                        <p className='text-md font-semibold text-black text-opacity-70'>주요고객은,</p>
                         <p className='text-2xl font-bold text-black text-opacity-70'>
                             {commercial_district_average_sales_max_percent_client_top1}, {commercial_district_average_sales_max_percent_client_top2}
                         </p>

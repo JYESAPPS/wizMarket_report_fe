@@ -167,14 +167,14 @@ const PopulationJscore = ({ population, storeInfoRedux }) => {
             </div>
 
             <div className="">
-                {/* <div className="flex justify-center">
+                <div className="flex justify-center">
                     <div className="w-6 h-6">
                         <img className='block w-full' src="/assets/component/tip.png" alt="별 이미지" />
                     </div>
                 </div>
                 <div className="">
                     <p>...</p>
-                </div> */}
+                </div>
             </div>
         </div>
     );

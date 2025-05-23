@@ -111,7 +111,7 @@ const StoreInfo = ({ storeInfo, storeInfoRedux }) => {
                     <p className='text-gray-300 text-xs absolute bottom-[-38px]'>{format_current_datetime}</p>
                 </div>
             </div>
-
+{false &&(
             <div className="bg-black px-4 py-4">
                 {/* <div className=""> */}
                 {/* <div className="flex justify-center pt-4 pb-2">
@@ -130,7 +130,7 @@ const StoreInfo = ({ storeInfo, storeInfoRedux }) => {
                     <img src="/assets/component/wizAD.png" alt="Wiz-advice_icon" className='block w-full h-auto' />
                 </div> */}
             </div>
-
+)}
 
         </div>
     );
