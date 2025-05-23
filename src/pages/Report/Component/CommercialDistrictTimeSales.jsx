@@ -5,7 +5,7 @@ import ChartDataLabels from 'chartjs-plugin-datalabels';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ChartDataLabels);
 
-const CommercialDistrictTimeSales = ({ commercialDistrictTimeSales }) => {
+const CommercialDistrictTimeSales = ({ commercialDistrictTimeSales, storeInfoRedux }) => {
     if (!commercialDistrictTimeSales) {
         return (
             <div className="p-4 bg-white">
@@ -37,7 +37,7 @@ const CommercialDistrictTimeSales = ({ commercialDistrictTimeSales }) => {
     const maxIndex = timeValues.indexOf(maxValue);
     const minIndex = timeValues.indexOf(minValue);
 
-    const timeLabels = ['06-09시', '09-12시', '12-15시', '15-18시', '18-21시', '21-24시'];
+    const timeLabels = ['06-09', '09-12', '12-15', '15-18', '18-21', '21-24'];
 
     const data = {
         labels: timeLabels,
@@ -80,7 +80,7 @@ const CommercialDistrictTimeSales = ({ commercialDistrictTimeSales }) => {
                 color: 'black',
                 anchor: 'center',
                 align: 'center',
-                formatter: (value) => value.toFixed(1) + '%',
+                formatter: (value) => value.toFixed(1),
                 font: {
                     size: 12,
                     weight: 'bold',
@@ -101,7 +101,7 @@ const CommercialDistrictTimeSales = ({ commercialDistrictTimeSales }) => {
                 max: maxValue,
                 ticks: {
                     callback: function (value) {
-                        return value.toFixed(1) + '%';
+                        return value.toFixed(1);
                     }
                 }
             }
@@ -111,11 +111,13 @@ const CommercialDistrictTimeSales = ({ commercialDistrictTimeSales }) => {
     return (
         <div className="bg-white p-4 rounded-lg shadow-md space-y-6">
             <div className="">
-                <p className="text-md font-bold pb-2">손님이 많이 방문하는 시간은요?</p>
-                <p className="text-sm text-gray-600">
+                <p className="text-md font-bold pb-2">
+                    {storeInfoRedux?.detail_category_name ? `${storeInfoRedux.biz_detail_category_rep_name}에 ` : ''}
+                    손님이 많이 방문하는 시간은요?</p>
+                {/* <p className="text-sm text-gray-600">
                     {timeLabels[maxIndex]}의 매출이 {maxValue.toFixed(1)}%로 가장 높고,{' '}
                     {timeLabels[minIndex]}의 매출이 {minValue.toFixed(1)}%로 가장 낮습니다.
-                </p>
+                </p> */}
                 <div className="py-4 h-80">
                     <Bar data={data} options={options} />
                 </div>

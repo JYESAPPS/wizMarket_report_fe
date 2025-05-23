@@ -465,37 +465,29 @@ const Report = React.memo(() => {
                         {renderSection(CommercialDistrict, 'commercialDistrict', { commercialDistrict: states.data.commercialDistrict, commercialDistrictJscore: states.data.commercialDistrictJscore, storeInfoRedux })}
                     </section>
 
-                    <section className="px-1 py-1">
+                    {/* ---가장 많이 주문하는 메뉴--- */}
+                    {/* <section className="px-1 py-1">
                         {renderSection(RisingMenu, 'risingMenu', { risingMenu: states.data.risingMenu, storeInfoRedux })}
-                    </section>
+                    </section> */}
 
-                    {states.data.storeCategoryDescription && states.data.storeCategoryDescription?.length > 0 && (
+                    {/* ---storeCategoryDescription--- */}
+                    {/* {states.data.storeCategoryDescription && states.data.storeCategoryDescription?.length > 0 && (
                         <section className="px-1 py-1">
                             {renderSection(StoreCategoryDescription, 'storeCategoryDescription', { storeCategoryDescription: states.data.storeCategoryDescription, storeInfoRedux })}
                         </section>
-                    )}
+                    )} */}
 
-                    {!states.error.commonInfo && !states.loading.commonInfo && states.data.commonInfo?.map((commonReport) => (
+                    {/* ---공통정보--- */}
+                    {/* {!states.error.commonInfo && !states.loading.commonInfo && states.data.commonInfo?.map((commonReport) => (
                         <section className="px-1 py-1" key={commonReport.common_information_id}>
                             {renderSection(CommonInformation, 'commonInfo', { commonReport })}
                         </section>
-                    ))}
+                    ))} */}
 
-                    
-
-                    
-
-                    
-
-                    
-
-                    
-
-                    
-
-                    <section className="px-1 py-1">
+                    {/* ---동네상권--- */}
+                    {/* <section className="px-1 py-1">
                         {renderSection(CommercialDistrictAvgJScore, 'commercialDistrictAvgJscore', { commercialDistrictAvgJscore: states.data.commercialDistrictAvgJscore, storeInfoRedux })}
-                    </section>
+                    </section> */}
 
                     
 
@@ -504,23 +496,27 @@ const Report = React.memo(() => {
                     </section> */}
 
                     
-
+                    {/* ---요일별 매출현황--- */}
                     <section className="px-1 py-1">
                         {renderSection(CommercialDistrictWeekdaySales, 'commercialDistrictWeekdaySales', { commercialDistrictWeekdaySales: states.data.commercialDistrictWeekdaySales, storeInfoRedux })}
                     </section>
 
+                    {/* ---가장 많이 방문하는 시간--- */}
                     <section className="px-1 py-1">
                         {renderSection(CommercialDistrictTimeSales, 'commercialDistrictTimeSales', { commercialDistrictTimeSales: states.data.commercialDistrictTimeSales, storeInfoRedux })}
                     </section>
 
+                    {/* ---우리지역에서 가장 잘되는 곳?--- */}
                     <section className="px-1 py-1">
                         {renderSection(CommercialDistrictRisingSales, 'commercialRisingSales', { commercialRisingSales: states.data.commercialRisingSales, storeInfoRedux })}
                     </section>
 
-                    <section className="px-1 py-1">
+                    {/* ---매출 증가 업종 TOP3--- */}
+                    {/* <section className="px-1 py-1">
                         {renderSection(RisingBusiness, 'risingBusiness', { risingBusiness: states.data.risingBusiness, storeInfoRedux })}
-                    </section>
+                    </section> */}
 
+                    {/* ---매창 근처에는 무엇이 있을까?--- */}
                     <section className="px-1 py-1">
                         {renderSection(LocTourInfo, 'locTourInfo', { locTourInfo: states.data.locTourInfo, storeInfoRedux })}
                     </section>

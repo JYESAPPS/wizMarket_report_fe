@@ -35,7 +35,7 @@ const LocTourInfo = ({ locTourInfo }) => {
 
     return (
         <div className="bg-white p-4 rounded-lg shadow-md">
-            <p className="text-sm text-black text-opacity-80">매장 근처 관광 명소는 무엇이 있을까?</p>
+            <p className="text-sm text-black text-opacity-80">매장 근처에는 무엇이 있을까?</p>
 
             {visibleCategories.map(([category, categoryItems]) => (
                 <div key={category} className="py-6">

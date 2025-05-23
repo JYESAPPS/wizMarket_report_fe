@@ -29,7 +29,7 @@ const CommercialDistrictRisingSales = ({ commercialRisingSales, storeInfoRedux }
         <div className="bg-white p-4 rounded-lg shadow-md space-y-6">
             <div className="flex flex-col gap-4">
                 <h2 className="text-sm text-black text-opacity-80">
-                    {month}월 우리지역에서 {biz_detail_category_rep_name} 가장 잘 되는 곳은?
+                    {month}월 우리 지역에서 {biz_detail_category_rep_name}이 가장 잘 되는 곳은?
                 </h2>
                 <p className="text-2xl font-semibold">{rank1District}, {rank2District}, {rank3District}</p>
             </div>

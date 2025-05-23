@@ -9,7 +9,7 @@ const LocInfoHotPlace = ({ locInfoHotPlace, storeInfoRedux }) => {
         );
     }
 
-    const { nice_biz_map_data_ref_date, sub_district_name } = storeInfoRedux;
+    const { nice_biz_map_data_ref_date, district_name, sub_district_name } = storeInfoRedux;
     const date = new Date(nice_biz_map_data_ref_date);
     const month = date.getMonth() + 1;
 
@@ -29,7 +29,7 @@ const LocInfoHotPlace = ({ locInfoHotPlace, storeInfoRedux }) => {
         <div className="p-4 rounded-lg shadow-md " style={{ background: 'linear-gradient(to right, #6B78E8, #C67AF7)' }}>
             <div className="flex flex-col gap-4">
                 <h2 className="text-sm text-white text-opacity-80 font-normal">
-                    {month}월 우리지역에서 {sub_district_name}의 핫플레이스는? (입지)
+                    {month}월 우리 지역 {district_name}의 핫플레이스는?
                 </h2>
                 <p className="text-white text-2xl font-semibold py-2 div-underline-hotplace">{rank1District}, {rank2District}, {rank3District}</p>
             </div>
@@ -50,8 +50,8 @@ const LocInfoHotPlace = ({ locInfoHotPlace, storeInfoRedux }) => {
                     const rankStyle = isHighlighted ? "text-[#16DBCC] text-sm font-semibold" : "text-[#16DBCC] text-sm";
 
                     return (
-                        <div key={index} className="grid grid-cols-[1.3fr_2fr_3fr_3fr_1fr] gap-2 py-4">
-                            <p className={rankStyle}>{item.rank}</p>
+                        <div key={index} className="grid grid-cols-[1.3fr_2fr_3fr_3fr_1fr] gap-2 py-2">
+                            <p className={rankStyle} style={{ paddingLeft: '0.5em' }}>{item.rank}</p>
                             <p className={textStyle}>{districtName}</p>
                             <p className={textStyle}>{Intl.NumberFormat().format(movepop)}명</p>
                             <p className={textStyle}>{Intl.NumberFormat().format(sales / 10000)}만원</p>

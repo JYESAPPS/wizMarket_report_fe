@@ -5,7 +5,7 @@ import ChartDataLabels from 'chartjs-plugin-datalabels';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ChartDataLabels);
 
-const commercialDistrictWeekdaySales = ({ commercialDistrictWeekdaySales }) => {
+const commercialDistrictWeekdaySales = ({ commercialDistrictWeekdaySales, storeInfoRedux }) => {
     if (!commercialDistrictWeekdaySales) {
         return (
             <div className="p-4 bg-white">
@@ -39,7 +39,7 @@ const commercialDistrictWeekdaySales = ({ commercialDistrictWeekdaySales }) => {
     const maxIndex = weekdayValues.indexOf(maxValue);
     const minIndex = weekdayValues.indexOf(minValue);
 
-    const weekdayLabels = ['월요일', '화요일', '수요일', '목요일', '금요일', '토요일', '일요일'];
+    const weekdayLabels = ['월', '화', '수', '목', '금', '토', '일'];
 
     const data = {
         labels: weekdayLabels,
@@ -84,7 +84,7 @@ const commercialDistrictWeekdaySales = ({ commercialDistrictWeekdaySales }) => {
                 color: 'black',
                 anchor: 'center',
                 align: 'center',
-                formatter: (value) => value.toFixed(1) + '%',
+                formatter: (value) => value.toFixed(1),
                 font: {
                     size: 12,
                     weight: 'bold',
@@ -105,7 +105,7 @@ const commercialDistrictWeekdaySales = ({ commercialDistrictWeekdaySales }) => {
                 max: maxValue,
                 ticks: {
                     callback: function (value) {
-                        return value.toFixed(1) + '%';
+                        return value.toFixed(1);
                     }
                 }
             }
@@ -115,11 +115,13 @@ const commercialDistrictWeekdaySales = ({ commercialDistrictWeekdaySales }) => {
     return (
         <div className="bg-white p-4 rounded-lg shadow-md space-y-6">
             <div className="">
-                <p className="text-md font-bold pb-2">요일별 매출 현황은 어떤가요?</p>
-                <p className="text-sm text-gray-600">
+                <p className="text-md font-bold pb-2">
+                    {storeInfoRedux?.detail_category_name ? `${storeInfoRedux.biz_detail_category_rep_name}의 ` : ''}
+                    요일별 매출 현황은 어떤가요?</p>
+                {/* <p className="text-sm text-gray-600">
                     {weekdayLabels[maxIndex]}의 매출이 {maxValue.toFixed(1)}%로 가장 높고,{' '}
                     {weekdayLabels[minIndex]}의 매출이 {minValue.toFixed(1)}%로 가장 낮습니다.
-                </p>
+                </p> */}
                 <div className="py-4 h-80">
                     <Bar data={data} options={options} />
                 </div>
