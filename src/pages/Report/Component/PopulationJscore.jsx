@@ -19,7 +19,7 @@ const PopulationJscore = ({ population, storeInfoRedux }) => {
     if (!population) {
         return <div>데이터를 불러오는 중 오류가 발생했습니다.</div>;
     }
-
+    const { local_store_loc_info_j_score_data, loc_info_advice } = population;
     const { sub_district_name } = storeInfoRedux || {}
 
     const {
@@ -43,7 +43,7 @@ const PopulationJscore = ({ population, storeInfoRedux }) => {
         loc_info_move_pop_j_score,
         loc_info_shop_j_score,
         loc_info_income_j_score
-    } = population;
+    } = local_store_loc_info_j_score_data;
 
     // const ageValues = [
     //     population_age_10_under,
@@ -167,13 +167,14 @@ const PopulationJscore = ({ population, storeInfoRedux }) => {
             </div>
 
             <div className="">
-                <div className="flex justify-center">
-                    <div className="w-6 h-6">
-                        <img className='block w-full' src="/assets/component/tip.png" alt="별 이미지" />
+                <div className="pt-4">
+                    <div className="flex justify-center ">
+                        <div className="w-6 h-auto">
+                            <img className='block w-full' src="/assets/component/tip.png" alt="별 이미지" />
+                        </div>
                     </div>
-                </div>
-                <div className="">
-                    <p>...</p>
+                    <p className='text-md font-bold py-2'>분석 및 조언</p>
+                    <p className="text-lg" dangerouslySetInnerHTML={{ __html: loc_info_advice.replace(/\n/g, "<br />") }}></p>
                 </div>
             </div>
         </div>

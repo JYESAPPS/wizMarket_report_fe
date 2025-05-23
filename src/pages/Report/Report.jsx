@@ -22,14 +22,14 @@ import CommercialDistrictRisingSales from "./Component/CommercialDistrictRisingS
 import LocInfoHotPlace from "./Component/LocInfoHotPlace";
 import RisingBusiness from "./Component/RisingBusiness";
 import Footer from "./Component/Footer";
-import StoreDescription from "./Component/StoreDescription";
+// import StoreDescription from "./Component/StoreDescription";
 import StoreCategoryDescription from "./Component/StoreCategoryDescription";
 import LocTourInfo from "./Component/LocTourInfo";
 import RoadEventInfo from "./Component/RoadEventInfo";
 import Ad1 from "./Component/AD1";
 import Ad2 from "./Component/Ad2";
 import Ad3 from "./Component/Ad3";
-import StorePromotion from "./Component/StorePromotion";
+// import StorePromotion from "./Component/StorePromotion";
 
 class ErrorBoundary extends React.Component {
     constructor(props) {
@@ -399,6 +399,8 @@ const Report = React.memo(() => {
                         {renderSection(LocInfoAvgJscore, 'locInfoAvgJscore', { locInfoAvgJscore: states.data.locInfoAvgJscore, storeInfoRedux })}
                     </section>
 
+                    
+
                     {/* <section className="px-1 py-1">
                         {renderSection(StorePromotion, 'storeInfo', { storeInfo: states.data.storeInfo, storeInfoRedux })}
                     </section> */}
@@ -412,6 +414,13 @@ const Report = React.memo(() => {
                     <section className="px-1 py-1">
                         {renderSection(PopulationJscore, 'population', { population: states.data.population, storeInfoRedux })}
                     </section>
+
+                    {/* 
+                        <section className="px-1 py-1">
+                            {renderSection(LocInfoJScore, 'locInfo', { locInfo: states.data.locInfo, storeInfoRedux })}
+                        </section>
+                    */}
+
 
                     {/* ---인구 분포--- */}
                     <section className="px-1 py-1">
@@ -476,9 +485,7 @@ const Report = React.memo(() => {
 
                     
 
-                    {/* <section className="px-1 py-1">
-                        {renderSection(LocInfoJScore, 'locInfo', { locInfo: states.data.locInfo, storeInfoRedux })}
-                    </section> */}
+                    
 
                     
 
