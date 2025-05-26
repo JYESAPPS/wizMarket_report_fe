@@ -172,7 +172,7 @@ const PopulationJscore = ({ population, storeInfoRedux }) => {
                         <div className="w-6 h-auto">
                             <img className='block w-full' src="/assets/component/tip.png" alt="별 이미지" />
                         </div>
-                    </div>
+                    </div>  
                     <p className='text-md font-bold py-2'>분석 및 조언</p>
                     <p className="text-lg" dangerouslySetInnerHTML={{ __html: loc_info_advice.replace(/\n/g, "<br />") }}></p>
                 </div>

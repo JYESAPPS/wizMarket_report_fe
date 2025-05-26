@@ -19,7 +19,7 @@ const Population = ({ population, storeInfoRedux }) => {
     if (!population) {
         return <div>데이터를 불러오는 중 오류가 발생했습니다.</div>;
     }
-    const { local_store_loc_info_j_score_data } = population;
+    const { local_store_loc_info_j_score_data, population_advice } = population;
 
     const { nice_biz_map_data_ref_date } = storeInfoRedux;
 
@@ -175,8 +175,8 @@ const Population = ({ population, storeInfoRedux }) => {
                         </div>
                     </div>
                     <p className='text-md font-bold py-2'>연령별 특성 및 응대방법</p>
-                    {/* <p className="text-lg" dangerouslySetInnerHTML={{ __html: loc_info_advice.replace(/\n/g, "<br />") }}></p> */}
-                    <p>...</p>
+                    <p className="text-lg" dangerouslySetInnerHTML={{ __html: population_advice.replace(/\n/g, "<br />") }}></p>
+
                 </div>
             </div>
         </div>
