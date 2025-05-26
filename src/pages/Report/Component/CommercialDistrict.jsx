@@ -115,7 +115,7 @@ const CommercialDistrict = ({ commercialDistrict, commercialDistrictJscore, stor
         commercial_district_average_sales_max_percent_client_top2,
     } = commercialDistrict;
 
-    const { district_name, sub_district_name, biz_detail_category_rep_name, nice_biz_map_data_ref_date } = storeInfoRedux;
+    const { district_name, sub_district_name, nice_biz_map_data_ref_date } = storeInfoRedux;
 
     // 주요고객 섹션 표시 여부
     const showMainCustomers = commercial_district_average_sales_max_percent_client_top1 !== "-" &&
@@ -158,7 +158,7 @@ const CommercialDistrict = ({ commercialDistrict, commercialDistrictJscore, stor
             <div className="">
                 {/* <p className="text-md font-semibold py-4">{storeInfoRedux.sub_district_name} {storeInfoRedux.biz_detail_category_rep_name} 상권분석</p> */}
                 {/* <p className='text-md text-opacity-80 pb-4'>내 점포 사업 요약 <span className='text-xs text-opacity-80'>{formatDate(nice_biz_map_data_ref_date)}</span></p> */}
-                <p className='font-bold text-opacity-80 py-4'>우리 동네 {storeInfoRedux.biz_detail_category_rep_name} 매장 평균 <span className='text-xs font-normal text-black text-opacity-70'>{formatDate(nice_biz_map_data_ref_date)} 기준 자료</span></p>
+                <p className='text-lg font-bold text-opacity-80'>{sub_district_name} {storeInfoRedux.biz_detail_category_rep_name} 매장 평균 <span className='text-xs font-normal text-black text-opacity-70'>{formatDate(nice_biz_map_data_ref_date)} 기준 자료</span></p>
 
                 {/* <div>
                     {lowScores.length > 0 && highScores.length > 0 ? (
@@ -190,7 +190,7 @@ const CommercialDistrict = ({ commercialDistrict, commercialDistrictJscore, stor
             <div className="">
                 {showMainCustomers && (
                     <div className="py-4 text-right">
-                        <p className='text-md font-semibold text-black text-opacity-70'>주요고객은</p>
+                        <p className='text-lg font-semibold text-black text-opacity-70'>주요고객은</p>
                         <p className='text-2xl font-bold text-black text-opacity-70'>
                             {commercial_district_average_sales_max_percent_client_top1}, {commercial_district_average_sales_max_percent_client_top2}
                         </p>
@@ -213,16 +213,16 @@ const CommercialDistrict = ({ commercialDistrict, commercialDistrictJscore, stor
 
                 {showSalesScale && (
                     <div className="py-4 text-right">
-                        <p className='text-md font-semibold text-opacity-80 text-nowrap truncate'>점포당 매출규모는</p>
-                        <p className='text-xs font-normal text-black text-opacity-70'>전월대비
+                        <p className='text-lg font-semibold text-black text-opacity-70'>점포당 매출규모는</p>
+                        <p className='text-sm font-normal text-black text-opacity-70'>전월대비
                             {commercial_district_national_average_sales > commercial_district_sub_district_average_sales
                                 ? ` ${Math.round((commercial_district_national_average_sales - commercial_district_sub_district_average_sales) / 10000).toLocaleString()}만원 감소`
                                 : ` ${Math.round((commercial_district_sub_district_average_sales - commercial_district_national_average_sales) / 10000).toLocaleString()}만원 증가`}
                         </p>
                         <p className='text-[2.5rem] font-bold text-black text-opacity-70'>{Math.round(commercial_district_sub_district_average_sales / 10000).toLocaleString()}만원</p>
-                        <p className='text-sm text-black text-opacity-70'>
-                            우리 동네 {district_name}는, 다른 동네에 비해</p>
-                        <p className='text-sm text-black text-opacity-70'>{commercial_district_sub_district_average_sales > commercial_district_national_average_sales
+                        <p className='text-base text-black text-opacity-70'>
+                            우리 {sub_district_name}은 {district_name}의 다른 동에 비해</p>
+                        <p className='text-base text-black text-opacity-70'>{commercial_district_sub_district_average_sales > commercial_district_national_average_sales
                             ? "장사가 잘되는 편입니다."
                             : "장사가 안되는 편입니다."}
                         </p>
@@ -231,20 +231,20 @@ const CommercialDistrict = ({ commercialDistrict, commercialDistrictJscore, stor
 
                 {showPaymentAndUsage && (
                     <div className="py-4 text-right">
-                        <p className='text-md font-semibold text-opacity-80 whitespace-nowrap truncate'>평균 객단가는</p>
-                        <p className='text-xs font-normal text-black text-opacity-70'>
+                        <p className='text-lg font-semibold text-black text-opacity-70'>평균 객단가는</p>
+                        <p className='text-sm font-normal text-black text-opacity-70'>
                             {commercial_district_national_average_payment > commercial_district_national_usage_count
                                 ? ` 감소추세`
                                 : ` 증가추세`}
                         </p>
                         <p className='text-[2.5rem] font-bold text-black text-opacity-70 '>{commercial_district_sub_district_average_payment.toLocaleString()}원</p>
-                        <p className='text-xs text-black text-opacity-70'>우리 동네 {district_name}는, 다른 동네에 비해
+                        <p className='text-base text-black text-opacity-70'>우리 {sub_district_name}은 {district_name}의 다른 동에 비해
                             {commercial_district_national_average_payment > commercial_district_sub_district_average_payment
                                 ? ` 객단가가 낮은 편입니다.`
                                 : ` 객단가가 높은 편입니다.`}
                         </p>
 
-                        <p className='text-sm text-black text-opacity-70'> 이용건수는 {commercial_district_sub_district_usage_count.toLocaleString()}건으로
+                        <p className='text-base text-black text-opacity-70'> 이용건수는 {commercial_district_sub_district_usage_count.toLocaleString()}건으로
                             {commercial_district_national_usage_count > 0 ? (
                                 commercial_district_national_usage_count > commercial_district_sub_district_usage_count ? (
                                     ` ${((commercial_district_national_usage_count - commercial_district_sub_district_usage_count) / commercial_district_national_usage_count * 100).toFixed(2)}% 감소하였습니다`
@@ -259,7 +259,7 @@ const CommercialDistrict = ({ commercialDistrict, commercialDistrictJscore, stor
 
                 {showDensity && (
                     <div className="py-4 text-right">
-                        <p className='text-md font-semibold text-opacity-80'>경쟁매장 밀집도는 얼마나</p>
+                        <p className='text-lg font-semibold text-black text-opacity-70'>경쟁매장 밀집도는 얼마나</p>
                         <p className='text-[2.5rem] font-bold text-black text-opacity-70'>{commercial_district_sub_district_density_average}%</p>
                         <p className='text-sm text-black text-opacity-70'>전국 평균 수치보다 {commercial_district_sub_district_density_average > commercial_district_national_density_average ? "높습니다." : "낮습니다."}</p>
                     </div>

@@ -123,12 +123,10 @@ const CommercialDistrictMainCategoryCount = ({ commercialDistrictMainCategory, s
 
     return (
         <div className='bg-white p-4 rounded-lg shadow-md'>
-            <div className='py-2'>
-                <p className="font-bold text-[#000000] text-opacity-70">{storeInfoRedux.sub_district_name} 업종별 분포 ({formattedDate} 기준)</p>
+                <p className="text-lg font-bold text-opacity-80">{storeInfoRedux.sub_district_name} 업종별 분포 <span className='text-xs font-normal text-black text-opacity-70'>{formattedDate} 기준 자료</span></p>
                 <p className='pt-4 text-lg text-[#000000] text-opacity-70'>
                     {storeInfoRedux.sub_district_name}은 {mostCommonCategory} 업종이 가장 많고 {leastCommonCategory} 업종이 가장 적게 분포합니다.
                 </p>
-            </div>
             <div className="h-64">
                 <Pie data={data} options={options} plugins={plugins} />
             </div>

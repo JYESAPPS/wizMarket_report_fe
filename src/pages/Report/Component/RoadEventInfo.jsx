@@ -12,7 +12,7 @@ const RoadEventInfo = ({ roadEventInfo }) => {
 
     return (
         <div className="bg-white p-4 rounded-lg shadow-md">
-            <p className="text-base font-semibold line">실시간 주변 교통상황 상태는?!</p>
+            <p className="text-lg font-bold text-opacity-80">실시간 주변 교통상황 상태는?!</p>
             {items.map((item, index) => (
                 <div key={index} className="flex justify-between gap-2 py-4">
                     <div className="flex-2 flex items-center">

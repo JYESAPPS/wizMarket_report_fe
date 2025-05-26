@@ -2,6 +2,7 @@ import React from 'react';
 import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
+import formatDate from '../../../utils/formatDate';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ChartDataLabels);
 
@@ -13,6 +14,8 @@ const CommercialDistrictTimeSales = ({ commercialDistrictTimeSales, storeInfoRed
             </div>
         );
     }
+
+    const { sub_district_name, biz_detail_category_rep_name, nice_biz_map_data_ref_date } = storeInfoRedux;
 
     const {
         commercial_district_average_sales_percent_06_09,
@@ -33,9 +36,9 @@ const CommercialDistrictTimeSales = ({ commercialDistrictTimeSales, storeInfoRed
     ];
 
     const maxValue = Math.max(...timeValues);
-    const minValue = Math.min(...timeValues);
-    const maxIndex = timeValues.indexOf(maxValue);
-    const minIndex = timeValues.indexOf(minValue);
+    // const minValue = Math.min(...timeValues);
+    // const maxIndex = timeValues.indexOf(maxValue);
+    // const minIndex = timeValues.indexOf(minValue);
 
     const timeLabels = ['06-09', '09-12', '12-15', '15-18', '18-21', '21-24'];
 
@@ -111,9 +114,8 @@ const CommercialDistrictTimeSales = ({ commercialDistrictTimeSales, storeInfoRed
     return (
         <div className="bg-white p-4 rounded-lg shadow-md space-y-6">
             <div className="">
-                <p className="text-md font-bold pb-2">
-                    {storeInfoRedux?.detail_category_name ? `${storeInfoRedux.biz_detail_category_rep_name}에 ` : ''}
-                    손님이 많이 방문하는 시간은요?</p>
+                <p className="text-lg font-bold text-opacity-80">
+                    {sub_district_name} {biz_detail_category_rep_name}에 손님이 많이 방문하는 시간은요? <span className='text-xs font-normal text-black text-opacity-70'>{formatDate(nice_biz_map_data_ref_date)} 기준 자료</span></p>
                 {/* <p className="text-sm text-gray-600">
                     {timeLabels[maxIndex]}의 매출이 {maxValue.toFixed(1)}%로 가장 높고,{' '}
                     {timeLabels[minIndex]}의 매출이 {minValue.toFixed(1)}%로 가장 낮습니다.

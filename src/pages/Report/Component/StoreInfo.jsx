@@ -85,7 +85,7 @@ const StoreInfo = ({ storeInfo, storeInfoRedux }) => {
                                 ? 'text-lg'
                                 : store_name.length >= 10
                                     ? 'text-xl'
-                                    : 'text-2xl'} font-bold w-56 truncate`}
+                                    : 'text-2xl'} font-bold w-80 truncate`}
                         >
                             {store_name}
                         </p>

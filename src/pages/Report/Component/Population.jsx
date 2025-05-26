@@ -19,7 +19,9 @@ const Population = ({ population, storeInfoRedux }) => {
     if (!population) {
         return <div>데이터를 불러오는 중 오류가 발생했습니다.</div>;
     }
-    const { local_store_loc_info_j_score_data,  } = population;
+    const { local_store_loc_info_j_score_data } = population;
+
+    const { nice_biz_map_data_ref_date } = storeInfoRedux;
 
     const {
         // population_total,
@@ -140,14 +142,14 @@ const Population = ({ population, storeInfoRedux }) => {
     return (
         <div className='bg-white p-4 rounded-lg shadow-md space-y-6'>
             <div>
-                <p className="text-base font-bold">{storeInfoRedux.sub_district_name} 인구분포 ({formatDate(storeInfoRedux.population_data_ref_date)} 기준)</p>
+                <p className='text-lg font-bold text-opacity-80'>{storeInfoRedux.sub_district_name} 인구분포 <span className='text-xs font-normal text-black text-opacity-70'>{formatDate(nice_biz_map_data_ref_date)} 기준 자료</span></p>
                 {/* <p className='text-lg text-[#242424]'>
                     총 인구 수 {population_total ? population_total.toLocaleString() : ''}명 중
                     여성 {population_female_percent ? population_female_percent : '데이터 없음'}%,
                     남성 {population_male_percent ? population_male_percent : '데이터 없음'}%로 {genderComparison}
                     또한 {ageLabels[maxIndex]}가 가장 많고 {ageLabels[minIndex]} 인구가 가장 적습니다.
                 </p> */}
-                <p className='text-lg text-[#242424]'>
+                <p className='py-4 text-lg text-[#242424]'>
                     우리동네 누가 사는지 안다면 손님을 응대하는 좋은 기술이 나옵니다!
                 </p>
             </div>

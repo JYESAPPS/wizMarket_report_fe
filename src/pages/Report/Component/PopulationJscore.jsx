@@ -154,7 +154,7 @@ const PopulationJscore = ({ population, storeInfoRedux }) => {
             <div className="py-4 h-80">
                 <Bar data={ageData} options={options} />
             </div> */}
-            <p className="pt-2 font-bold text-[#000000] text-opacity-70">{`${sub_district_name} 지역 경제 특성`}</p>
+            <p className='text-lg font-bold text-opacity-80'>{`${sub_district_name} 지역 경제 특성`}</p>
 
             <div className="">
                 <div className="flex justify-between text-center">

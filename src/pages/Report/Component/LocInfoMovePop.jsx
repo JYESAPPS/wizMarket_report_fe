@@ -23,7 +23,7 @@ const LocInfoMovePop = ({ locInfoMovePop, storeInfoRedux }) => {
         <div className='bg-white p-4 rounded-lg shadow-md space-y-6'>
             <div className="">
                 <div className="text-center pb-6">
-                    <p className='text-lg font-semibold'>매장 인근 ({sub_district_name}) 유동인구</p>
+                    <p className='text-lg font-bold text-opacity-80'>매장 인근 ({sub_district_name}) 유동인구</p>
                     <p className='text-xs py-4 font-sem'>일 평균 <span className='font-bold text-3xl'> {loc_info_move_pop.toLocaleString("ko-KR")}</span> <span className='font-bold text-xl'>명</span ></p>
                     <p>우리지역은 {city_name}에서 유동인구가 {popComparison} 편입니다</p>
                 </div>

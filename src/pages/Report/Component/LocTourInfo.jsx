@@ -35,7 +35,7 @@ const LocTourInfo = ({ locTourInfo }) => {
 
     return (
         <div className="bg-white p-4 rounded-lg shadow-md">
-            <p className="text-sm text-black text-opacity-80">매장 근처에는 무엇이 있을까?</p>
+            <p className="text-lg font-bold text-opacity-80">매장 근처에는 무엇이 있을까?</p>
 
             {visibleCategories.map(([category, categoryItems]) => (
                 <div key={category} className="py-6">
@@ -45,13 +45,16 @@ const LocTourInfo = ({ locTourInfo }) => {
                         {categoryItems.map((item, index) => (
                             <SwiperSlide key={index}>
                                 <div className="rounded-lg">
-                                    {item.firstimage && (
-                                        <img
-                                            src={item.firstimage}
-                                            alt={item.title}
-                                            className="w-full h-48 object-cover rounded-lg"
-                                        />
-                                    )}
+                                    {/* 이미지 조건부 렌더링 수정 */}
+                                    <img
+                                        src={item.firstimage ? item.firstimage : '/assets/component/noImage.png'}
+                                        alt={item.title || '이미지 없음'}
+                                        className="w-full h-48 object-cover rounded-lg"
+                                        onError={(e) => {
+                                            e.target.onerror = null;
+                                            e.target.src = '/assets/component/noImage.png';
+                                        }}
+                                    />
                                     <div className="">
                                         <div className="flex gap-2 leading-[30px] items-center">
                                             <p className="font-bold">{item.title}</p>

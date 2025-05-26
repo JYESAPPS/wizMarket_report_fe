@@ -116,6 +116,27 @@ body::-webkit-scrollbar-thumb {
   font-size: 0.75rem;
 }
 
+.gradient-text {
+  background: linear-gradient(to right,
+    #fff 0%,
+    #16DBCC 25%,
+    #7864F9 50%,
+    #C67AF7 75%,
+    #fff 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shine 3s linear infinite;
+  background-size: 200% auto;
+}
+
+@keyframes shine {
+  to {
+    background-position: 200% center;
+  }
+}
+
 /* ************************************************************************ */
 
 @layer components {

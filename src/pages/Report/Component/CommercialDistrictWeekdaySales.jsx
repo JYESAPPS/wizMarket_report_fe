@@ -2,6 +2,7 @@ import React from 'react';
 import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
+import formatDate from '../../../utils/formatDate';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ChartDataLabels);
 
@@ -13,6 +14,8 @@ const commercialDistrictWeekdaySales = ({ commercialDistrictWeekdaySales, storeI
             </div>
         );
     }
+
+    const { sub_district_name, biz_detail_category_rep_name, nice_biz_map_data_ref_date } = storeInfoRedux;
 
     const {
         commercial_district_average_sales_percent_mon,
@@ -35,9 +38,9 @@ const commercialDistrictWeekdaySales = ({ commercialDistrictWeekdaySales, storeI
     ];
 
     const maxValue = Math.max(...weekdayValues);
-    const minValue = Math.min(...weekdayValues);
-    const maxIndex = weekdayValues.indexOf(maxValue);
-    const minIndex = weekdayValues.indexOf(minValue);
+    // const minValue = Math.min(...weekdayValues);
+    // const maxIndex = weekdayValues.indexOf(maxValue);
+    // const minIndex = weekdayValues.indexOf(minValue);
 
     const weekdayLabels = ['월', '화', '수', '목', '금', '토', '일'];
 
@@ -115,9 +118,9 @@ const commercialDistrictWeekdaySales = ({ commercialDistrictWeekdaySales, storeI
     return (
         <div className="bg-white p-4 rounded-lg shadow-md space-y-6">
             <div className="">
-                <p className="text-md font-bold pb-2">
-                    {storeInfoRedux?.detail_category_name ? `${storeInfoRedux.biz_detail_category_rep_name}의 ` : ''}
-                    요일별 매출 현황은 어떤가요?</p>
+                <p className="text-lg font-bold text-opacity-80">
+                    {sub_district_name} {biz_detail_category_rep_name} 요일별 매출 현황은 어떤가요? <span className='text-xs font-normal text-black text-opacity-70'>{formatDate(nice_biz_map_data_ref_date)} 기준 자료</span>
+                </p>
                 {/* <p className="text-sm text-gray-600">
                     {weekdayLabels[maxIndex]}의 매출이 {maxValue.toFixed(1)}%로 가장 높고,{' '}
                     {weekdayLabels[minIndex]}의 매출이 {minValue.toFixed(1)}%로 가장 낮습니다.

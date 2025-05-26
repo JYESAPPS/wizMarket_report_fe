@@ -27,11 +27,11 @@ const LocInfoHotPlace = ({ locInfoHotPlace, storeInfoRedux }) => {
 
     return (
         <div className="p-4 rounded-lg shadow-md " style={{ background: 'linear-gradient(to right, #6B78E8, #C67AF7)' }}>
-            <div className="flex flex-col gap-4">
-                <h2 className="text-sm text-white text-opacity-80 font-normal">
+            <div className="flex flex-col">
+                <h2 className="text-lg text-white text-opacity-80 font-bold">
                     {month}월 우리 지역 {district_name}의 핫플레이스는?
                 </h2>
-                <p className="text-white text-2xl font-semibold py-2 div-underline-hotplace">{rank1District}, {rank2District}, {rank3District}</p>
+                <p className="text-3xl font-bold py-2 div-underline-hotplace gradient-text">{rank1District}, {rank2District}, {rank3District}</p>
             </div>
             <div className="grid grid-cols-[1.5fr_2fr_3fr_3fr_1fr] pt-2">
                 <p className="text-white text-opacity-80 font-normal text-sm">순위</p>

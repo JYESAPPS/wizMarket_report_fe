@@ -2,6 +2,7 @@ import React from 'react';
 import { Doughnut } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement } from 'chart.js';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
+import formatDate from '../../../utils/formatDate';
 
 ChartJS.register(ArcElement, ChartDataLabels);
 
@@ -14,7 +15,7 @@ const PopulationResidentWork = ({ populationResidentWork, storeInfoRedux }) => {
         );
     }
 
-    const { sub_district_name } = storeInfoRedux;
+    const { sub_district_name, nice_biz_map_data_ref_date } = storeInfoRedux;
     const { loc_info_resident, loc_info_work_pop, loc_info_resident_percent, loc_info_work_pop_percent } = populationResidentWork;
 
     const data = {
@@ -105,7 +106,7 @@ const PopulationResidentWork = ({ populationResidentWork, storeInfoRedux }) => {
         <div className='bg-white p-4 rounded-lg shadow-md space-y-6'>
             <div className="flex flex-col items-center">
                 <div className="w-full">
-                    <p className="pt-2 font-bold text-[#000000] text-opacity-70">{`${sub_district_name} 주거환경`}</p>
+                    <p className="text-lg font-bold text-opacity-80">{sub_district_name} 주거환경 <span className='text-xs font-normal text-black text-opacity-70'>{formatDate(nice_biz_map_data_ref_date)} 기준 자료</span></p>
                     <p className="py-4 text-lg text-[#000000] text-opacity-70">{focusAreaText}</p>
                 </div>
                 {/* 도넛 차트 */}
