@@ -6,7 +6,7 @@ const Router = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/wizmarket/report/:store_business_id" element={<Report />} />
+        <Route path="/wizmarket/report/:uuid" element={<Report />} />
       </Routes>
     </BrowserRouter>
   );

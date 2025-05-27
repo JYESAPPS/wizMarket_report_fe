@@ -54,7 +54,31 @@ class ErrorBoundary extends React.Component {
 }
 
 const Report = React.memo(() => {
-    const { store_business_id } = useParams();
+    const {uuid} = useParams();
+
+    useEffect(() => {
+        const fetchStoreBusinessId = async () => {
+          try {
+            const response = await axios.post(
+              `${process.env.REACT_APP_FASTAPI_BASE_URL}/report/get/uuid/store`,
+              { uuid },
+              {
+                headers: { "Content-Type": "application/json" },
+              }
+            );
+            set_store_business_id(response.data.store_business_number);
+          } catch (error) {
+            console.error("매장번호 조회 실패:", error);
+          }
+        };
+      
+        if (uuid) {
+          fetchStoreBusinessId();
+        }
+      }, [uuid]);
+
+
+    const [store_business_id, set_store_business_id] = useState(null);
     const dispatch = useDispatch();
     const storeInfoRedux = useSelector((state) => state.storeInfo);
 
