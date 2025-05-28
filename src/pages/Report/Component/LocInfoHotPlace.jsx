@@ -30,6 +30,9 @@ const LocInfoHotPlace = ({ locInfoHotPlace, storeInfoRedux }) => {
             <div className="flex flex-col">
                 <h2 className="text-lg text-white text-opacity-80 font-bold">
                     {month}월 우리 지역 {district_name}의 핫플레이스는?
+                    <p className="text-sm text-white text-opacity-70 font-normal">
+                        이곳을 주목하세요!
+                    </p>
                 </h2>
                 <p className="text-3xl font-bold py-2 div-underline-hotplace gradient-text">{rank1District}, {rank2District}, {rank3District}</p>
             </div>

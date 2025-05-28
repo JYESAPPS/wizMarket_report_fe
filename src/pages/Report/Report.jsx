@@ -26,9 +26,9 @@ import Footer from "./Component/Footer";
 // import StoreCategoryDescription from "./Component/StoreCategoryDescription";
 import LocTourInfo from "./Component/LocTourInfo";
 import RoadEventInfo from "./Component/RoadEventInfo";
-import Ad1 from "./Component/AD1";
-import Ad2 from "./Component/Ad2";
-import Ad3 from "./Component/Ad3";
+// import Ad1 from "./Component/AD1";
+// import Ad2 from "./Component/Ad2";
+// import Ad3 from "./Component/Ad3";
 // import StorePromotion from "./Component/StorePromotion";
 
 class ErrorBoundary extends React.Component {
@@ -457,7 +457,7 @@ const Report = React.memo(() => {
                     </section>
 
                     {/* ---중간 광고--- */}
-                    <section className="px-1 py-1">
+                    {/* <section className="px-1 py-1">
                         <Ad1 />
                     </section>
                     <section className="px-1 py-1">
@@ -465,7 +465,7 @@ const Report = React.memo(() => {
                     </section>
                     <section className="px-1 py-1">
                         <Ad3 />
-                    </section>
+                    </section> */}
 
                     {/* ---실시간 교통상황--- */}
                     {states.data.roadEventInfo?.body?.items?.length > 0 && (
@@ -520,12 +520,12 @@ const Report = React.memo(() => {
                     </section> */}
 
                     
-                    {/* ---요일별 매출현황--- */}
+                    {/* ---요일별 매출평균--- */}
                     <section className="px-1 py-1">
                         {renderSection(CommercialDistrictWeekdaySales, 'commercialDistrictWeekdaySales', { commercialDistrictWeekdaySales: states.data.commercialDistrictWeekdaySales, storeInfoRedux })}
                     </section>
 
-                    {/* ---가장 많이 방문하는 시간--- */}
+                    {/* ---시간대별 매출평균--- */}
                     <section className="px-1 py-1">
                         {renderSection(CommercialDistrictTimeSales, 'commercialDistrictTimeSales', { commercialDistrictTimeSales: states.data.commercialDistrictTimeSales, storeInfoRedux })}
                     </section>

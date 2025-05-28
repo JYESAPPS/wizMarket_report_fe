@@ -6,6 +6,9 @@ import formatDate from '../../../utils/formatDate';
 
 ChartJS.register(ArcElement, ChartDataLabels);
 
+// 상수
+const MIN_SAMPLE_SIZE = 5; // 최소 표본 수 기준
+
 const CommercialDistrictMainCategoryCount = ({ commercialDistrictMainCategory, storeInfoRedux }) => {
     if (!commercialDistrictMainCategory) {
         return (
@@ -33,19 +36,52 @@ const CommercialDistrictMainCategoryCount = ({ commercialDistrictMainCategory, s
         commercial_district_retail_business_count
     ];
 
-    const dataLabels = ['음식점', '의료/건강', '학문/교육', '여가/오락', '생활서비스', '소매/유통'];
+    // 데이터 유효성 검사 추가
+    const hasValidData = dataValues.some(value => value > 0);
     
-    const maxIndex = dataValues.indexOf(Math.max(...dataValues));
-    const minIndex = dataValues.indexOf(Math.min(...dataValues));
+    if (!hasValidData) {
+        return (
+            <div className='bg-white p-4 rounded-lg shadow-md'>
+                <p className="text-lg font-bold text-opacity-80">
+                    {storeInfoRedux.sub_district_name} 업종별 분포 
+                    <span className='text-xs font-normal text-black text-opacity-70 ml-2'>
+                        {formatDate(storeInfoRedux.nice_biz_map_data_ref_date)} 기준 자료
+                    </span>
+                </p>
+                <div className="py-8 text-center">
+                    <p className="text-gray-500">
+                        해당지역 내 업종의 표본수가 매우 적을 경우 사업자 정보보호를 위해 정보를 제공하지 않습니다.
+                    </p>
+                </div>
+            </div>
+        );
+    }
 
-    const mostCommonCategory = dataLabels[maxIndex];
-    const leastCommonCategory = dataLabels[minIndex];
+    const dataLabels = ['음식점', '의료/건강', '학문/교육', '여가/오락', '생활서비스', '소매/유통'];
+
+    // 유효한 데이터와 라벨 필터링
+    const validDataWithLabels = dataValues
+        .map((value, index) => ({
+            value,
+            label: dataLabels[index]
+        }))
+        .filter(item => item.value >= MIN_SAMPLE_SIZE);
+    
+    // 필터링된 데이터와 라벨 분리
+    const filteredValues = validDataWithLabels.map(item => item.value);
+    const filteredLabels = validDataWithLabels.map(item => item.label);
+
+    const maxIndex = filteredValues.indexOf(Math.max(...filteredValues));
+    const minIndex = filteredValues.indexOf(Math.min(...filteredValues));
+
+    const mostCommonCategory = filteredLabels[maxIndex];
+    const leastCommonCategory = filteredLabels[minIndex];
 
     const data = {
-        labels: dataLabels,
+        labels: filteredLabels,
         datasets: [
             {
-                data: dataValues,
+                data: filteredValues,
                 backgroundColor: [
                     '#FFF5EB',
                     '#F16913',
@@ -53,7 +89,7 @@ const CommercialDistrictMainCategoryCount = ({ commercialDistrictMainCategory, s
                     '#FDA26B',
                     '#FDD0A2',
                     '#FEE6C2'
-                ],
+                ].slice(0, filteredLabels.length), // 필터링된 데이터 수만큼 색상 사용
                 borderWidth: 0,
             },
         ],

@@ -49,7 +49,7 @@ const StoreInfo = ({ storeInfo, storeInfoRedux }) => {
 
     return (
         <div className="">
-            <div className='relative h-[473px] bg-white shadow-inner'>
+            <div className='relative h-[473px] bg-white shadow-inner overflow-hidde'>
                 <Swiper
                     modules={[Navigation, Pagination]}
                     spaceBetween={0}
@@ -69,36 +69,51 @@ const StoreInfo = ({ storeInfo, storeInfoRedux }) => {
                                     backgroundPosition: 'center',
                                 }}
                             >
-                                <div className='absolute bottom-0 w-full h-full bg-gradient-to-t from-black/100 to-transparent' style={{ height: '25%' }}></div>
+                                {/* 상단 그라데이션 */}
+                                <div className="absolute inset-x-0 bottom-0 h-[50%] bg-gradient-to-t from-black via-black/50 to-transparent"/>
+                                {/* 하단 그라데이션 */}
+                                <div className="absolute inset-x-0 bottom-0 h-[45%] bg-gradient-to-t from-black via-black/80 to-transparent" />
                             </div>
                         </SwiperSlide>
                     ))}
                 </Swiper>
 
-                <div className='absolute z-10 px-2 text-white bottom-4'>
+                <div 
+                    className="absolute left-0 right-0 top-0 z-[5]" 
+                    style={{
+                        height: '5%',
+                        background: 'linear-gradient(to bottom, rgb(0,0,0) 0%, rgb(0,0,0) 30%, rgba(0,0,0,0.9) 50%, rgba(0,0,0,0.7) 70%, rgba(0,0,0,0) 100%)',
+                        pointerEvents: 'none'
+                    }}
+                />
+
+                <div 
+                    className="absolute left-0 right-0 bottom-0 z-[5]" 
+                    style={{
+                        height: '15%',
+                        background: 'linear-gradient(to top, rgb(0,0,0) 0%, rgb(0,0,0) 30%, rgba(0,0,0,0.9) 50%, rgba(0,0,0,0.7) 70%, rgba(0,0,0,0) 100%)',
+                        pointerEvents: 'none'
+                    }}
+               />
+            
+                {/* 텍스트 컨텐츠 */}
+                <div className='absolute z-[6] px-4 text-white bottom-4 left-0 right-0'>
                     <div className="flex gap-2 items-center flex-nowrap">
-                        <p className='text-xs content-center bg-[#16DBCC] rounded-xl px-1 leading-5 truncate max-w-[100px]'>
+                        <p className='text-sm content-center bg-[#16DBCC] rounded-xl px-1 leading-5 truncate max-w-[100px]'>
                             {storeInfoRedux.detail_category_name}
                         </p>
-                        <p
-                            className={`${store_name.length >= 14
-                                ? 'text-lg'
-                                : store_name.length >= 10
-                                    ? 'text-xl'
-                                    : 'text-2xl'} font-bold w-80 truncate`}
-                        >
+                        <p className={`${store_name.length >= 14 ? 'text-lg' : store_name.length >= 10 ? 'text-xl' : 'text-2xl'} font-bold w-100 truncate`}>
                             {store_name}
                         </p>
                     </div>
-                    <p className="text-xs text-gray-300">
+                    <p className="text-sm text-gray-300">
                         {road_name ? `${road_name} ` : ""}
                         {building_name ? `${building_name} ` : ""}
                         {floor_info ? `${floor_info}층` : ""}
                     </p>
-
                 </div>
 
-                <div className="w-28 absolute top-6 right-2 flex flex-col items-center z-10">
+                <div className="w-28 absolute top-4 right-2 flex flex-col items-center z-[6]">
                     <div className="w-20 h-20">
                         <img
                             src={`http://openweathermap.org/img/wn/${weatherInfo.icon}@2x.png`}

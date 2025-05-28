@@ -91,13 +91,13 @@ const CommercialDistrict = ({ commercialDistrict, commercialDistrictJscore, stor
     };
     // 레이더 그래프
 
-    if (!commercialDistrictJscore) {
-        return (
-            <div className="p-4 bg-white">
-                <p className="text-red-500">commercialDistrictJscore 데이터를 불러오는 중 오류가 발생했습니다</p>
-            </div>
-        );
-    }
+    // if (!commercialDistrictJscore) {
+    //     return (
+    //         <div className="p-4 bg-white">
+    //             <p className="text-red-500">commercialDistrictJscore 데이터를 불러오는 중 오류가 발생했습니다</p>
+    //         </div>
+    //     );
+    // }
 
     const {
         commercial_district_national_density_average,
@@ -143,15 +143,30 @@ const CommercialDistrict = ({ commercialDistrict, commercialDistrictJscore, stor
     const noDataAvailable = !showMainCustomers && !showSalesDistribution &&
         !showSalesScale && !showPaymentAndUsage && !showDensity;
 
-    if (noDataAvailable) {
-        return (
-            <div className="bg-white p-4 rounded-lg shadow-md">
-                <p className='text-md text-opacity-80 pb-4'>내 점포 사업 요약</p>
-                <p className="text-center text-gray-500">상권분석 데이터가 없습니다.</p>
-            </div>
-        );
-    }
+    // 모든 섹션의 데이터가 있는지 체크
+    const allDataAvailable = showMainCustomers && showSalesScale && showPaymentAndUsage && showDensity;
 
+    // 모든 데이터가 없으면 알림문 띄움
+    // if (!allDataAvailable) {
+    //     return (
+    //         <div className="bg-white p-4 rounded-lg shadow-md">
+    //             <p className='text-lg font-bold text-opacity-80'>
+    //                 {sub_district_name} {storeInfoRedux.biz_detail_category_rep_name} 매장 평균 
+    //                 <span className='text-xs font-normal text-black text-opacity-70 ml-2'>
+    //                     {formatDate(nice_biz_map_data_ref_date)} 기준 자료
+    //                 </span>
+    //             </p>
+    //             <div className="py-8 text-center">
+    //                 <p className="text-gray-500">해당지역 내 업종의 표본수가 매우 적을 경우 사업자 정보보호를 위해 정보를 제공하지 않습니다.</p>
+    //             </div>
+    //         </div>
+    //     );
+    // }
+
+    // 모든 데이터가 없으면 섹터자체 없앰
+    if (!allDataAvailable) {
+        return null;
+    }
 
     return (
         <div className='bg-white p-4 rounded-lg shadow-md'>
@@ -261,7 +276,7 @@ const CommercialDistrict = ({ commercialDistrict, commercialDistrictJscore, stor
                     <div className="py-4 text-right">
                         <p className='text-lg font-semibold text-black text-opacity-70'>경쟁매장 밀집도는 얼마나</p>
                         <p className='text-[2.5rem] font-bold text-black text-opacity-70'>{commercial_district_sub_district_density_average}%</p>
-                        <p className='text-sm text-black text-opacity-70'>전국 평균 수치보다 {commercial_district_sub_district_density_average > commercial_district_national_density_average ? "높습니다." : "낮습니다."}</p>
+                        <p className='text-base text-black text-opacity-70'>전국 평균 수치보다 {commercial_district_sub_district_density_average > commercial_district_national_density_average ? "높습니다." : "낮습니다."}</p>
                     </div>
                 )}
             </div>

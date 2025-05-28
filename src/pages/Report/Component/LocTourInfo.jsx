@@ -7,19 +7,42 @@ const LocTourInfo = ({ locTourInfo }) => {
     const [groupedItems, setGroupedItems] = useState({});
 
     // 대분류(cat1)별로 아이템 그룹화
+    // useEffect(() => {
+    //     if (locTourInfo?.response?.body?.items?.item) {
+    //         const grouped = locTourInfo.response.body.items.item.reduce((acc, item) => {
+    //             const category = item.cat2_name || '기타';
+    //             if (!acc[category]) {
+    //                 acc[category] = [];
+    //             }
+    //             acc[category].push(item);
+    //             return acc;
+    //         }, {});
+    //         setGroupedItems(grouped);
+    //     }
+    // }, [locTourInfo]);
+
+    {/* 대분류(cat2)별로 아이템 그룹화, 허용된 카테고리만 포함 */}
     useEffect(() => {
-        if (locTourInfo?.response?.body?.items?.item) {
-            const grouped = locTourInfo.response.body.items.item.reduce((acc, item) => {
-                const category = item.cat2_name || '기타';
+    if (locTourInfo?.response?.body?.items?.item) {
+        const allowedCategories = ['문화시설', '축제'];
+        
+        const grouped = locTourInfo.response.body.items.item.reduce((acc, item) => {
+            const category = item.cat2_name || '기타';
+            
+            // 허용된 카테고리만 포함
+            if (allowedCategories.includes(category)) {
                 if (!acc[category]) {
                     acc[category] = [];
                 }
                 acc[category].push(item);
-                return acc;
-            }, {});
-            setGroupedItems(grouped);
-        }
+            }
+            return acc;
+        }, {});
+        
+        setGroupedItems(grouped);
+    }
     }, [locTourInfo]);
+
 
     if (!locTourInfo?.response?.body?.items) {
         return (
@@ -30,6 +53,11 @@ const LocTourInfo = ({ locTourInfo }) => {
     }
 
     const categoryList = Object.entries(groupedItems);
+
+    // 허용된 카테고리 데이터가 없으면 렌더링하지 않음
+    if (categoryList.length === 0) {
+        return null;
+    }
 
     const visibleCategories = showAll ? categoryList : categoryList.slice(0, 3);
 

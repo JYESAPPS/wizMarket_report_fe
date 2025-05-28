@@ -37,6 +37,14 @@ const commercialDistrictWeekdaySales = ({ commercialDistrictWeekdaySales, storeI
         commercial_district_average_sales_percent_sun
     ];
 
+    // 유효한 데이터가 있는지 확인
+    const hasValidData = weekdayValues.some(value => value > 0);
+
+    // 유효한 데이터가 없으면 컴포넌트를 렌더링하지 않음
+    if (!hasValidData) {
+        return null;
+    }
+
     const maxValue = Math.max(...weekdayValues);
     // const minValue = Math.min(...weekdayValues);
     // const maxIndex = weekdayValues.indexOf(maxValue);
@@ -119,7 +127,7 @@ const commercialDistrictWeekdaySales = ({ commercialDistrictWeekdaySales, storeI
         <div className="bg-white p-4 rounded-lg shadow-md space-y-6">
             <div className="">
                 <p className="text-lg font-bold text-opacity-80">
-                    {sub_district_name} {biz_detail_category_rep_name} 요일별 매출 현황은 어떤가요? <span className='text-xs font-normal text-black text-opacity-70'>{formatDate(nice_biz_map_data_ref_date)} 기준 자료</span>
+                    {sub_district_name} '{biz_detail_category_rep_name}' 업종 요일별 매출 평균 <span className='text-xs font-normal text-black text-opacity-70'>{formatDate(nice_biz_map_data_ref_date)} 기준 자료</span>
                 </p>
                 {/* <p className="text-sm text-gray-600">
                     {weekdayLabels[maxIndex]}의 매출이 {maxValue.toFixed(1)}%로 가장 높고,{' '}
