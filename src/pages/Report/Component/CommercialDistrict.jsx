@@ -89,8 +89,7 @@ const CommercialDistrict = ({ commercialDistrict, commercialDistrictJscore, stor
             }
         },
     };
-    // 레이더 그래프
-
+    //레이더 그래프 오류메세지
     // if (!commercialDistrictJscore) {
     //     return (
     //         <div className="p-4 bg-white">
@@ -175,22 +174,13 @@ const CommercialDistrict = ({ commercialDistrict, commercialDistrictJscore, stor
                 {/* <p className='text-md text-opacity-80 pb-4'>내 점포 사업 요약 <span className='text-xs text-opacity-80'>{formatDate(nice_biz_map_data_ref_date)}</span></p> */}
                 <p className='text-lg font-bold text-opacity-80'>{sub_district_name} {storeInfoRedux.biz_detail_category_rep_name} 매장 평균 <span className='text-xs font-normal text-black text-opacity-70'>{formatDate(nice_biz_map_data_ref_date)} 기준 자료</span></p>
 
-                {/* <div>
-                    {lowScores.length > 0 && highScores.length > 0 ? (
-                        <p className="text-lg text-opacity-70">
-                            {storeInfoRedux.sub_district_name}은 {lowScores.join(', ')}이 적고 {highScores.join(', ')}가 비교적 높은 편입니다.
-                        </p>
-                    ) : lowScores.length > 0 ? (
-                        <p className="text-lg text-opacity-70">{storeInfoRedux.sub_district_name}은 {lowScores.join(', ')}이 낮습니다.</p>
-                    ) : highScores.length > 0 ? (
-                        <p className="text-lg text-opacity-70">{storeInfoRedux.sub_district_name}은 {highScores.join(', ')}이 비교적 높습니다.</p>
-                    ) : (
-                        <p>점수 정보가 부족합니다.</p>
-                    )}
-                </div> */}
-                <div className="w-full h-72 flex justify-center">
-                    <Radar data={data} options={options} />
-                </div>
+                {/* 레이더 그래프 - allDataAvailable 조건부 렌더링 */}
+                {allDataAvailable && (
+                    <div className="w-full h-72 flex justify-center">
+                        <Radar data={data} options={options} />
+                    </div>
+                )}
+
                 {/* <div className="text-sm text-gray-500 pt-4">
                                 <div className="flex justify-center">
                                     <div className="w-6 h-auto">

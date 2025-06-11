@@ -58,24 +58,24 @@ const Report = React.memo(() => {
 
     useEffect(() => {
         const fetchStoreBusinessId = async () => {
-          try {
+        try {
             const response = await axios.post(
-              `${process.env.REACT_APP_FASTAPI_BASE_URL}/report/get/uuid/store`,
-              { uuid },
-              {
+            `${process.env.REACT_APP_FASTAPI_BASE_URL}/report/get/uuid/store`,
+            { uuid },
+            {
                 headers: { "Content-Type": "application/json" },
-              }
+            }
             );
             set_store_business_id(response.data.store_business_number);
-          } catch (error) {
+        } catch (error) {
             console.error("매장번호 조회 실패:", error);
-          }
+            }
         };
-      
+
         if (uuid) {
-          fetchStoreBusinessId();
+        fetchStoreBusinessId();
         }
-      }, [uuid]);
+    }, [uuid]);
 
 
     const [store_business_id, set_store_business_id] = useState(null);
