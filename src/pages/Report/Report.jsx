@@ -30,6 +30,7 @@ import RoadEventInfo from "./Component/RoadEventInfo";
 // import Ad2 from "./Component/Ad2";
 // import Ad3 from "./Component/Ad3";
 // import StorePromotion from "./Component/StorePromotion";
+// import MenuBar from "../../components/MenuBar";
 
 class ErrorBoundary extends React.Component {
     constructor(props) {
@@ -54,29 +55,63 @@ class ErrorBoundary extends React.Component {
 }
 
 const Report = React.memo(() => {
-    const {uuid} = useParams();
+    const { uuid } = useParams();
 
     useEffect(() => {
         const fetchStoreBusinessId = async () => {
-        try {
-            const response = await axios.post(
-            `${process.env.REACT_APP_FASTAPI_BASE_URL}/report/get/uuid/store`,
-            { uuid },
-            {
-                headers: { "Content-Type": "application/json" },
-            }
-            );
-            set_store_business_id(response.data.store_business_number);
-        } catch (error) {
-            console.error("매장번호 조회 실패:", error);
+            try {
+                const response = await axios.post(
+                    `${process.env.REACT_APP_FASTAPI_BASE_URL}/report/get/uuid/store`,
+                    { uuid },
+                    {
+                        headers: { "Content-Type": "application/json" },
+                    }
+                );
+                set_store_business_id(response.data.store_business_number);
+            } catch (error) {
+                console.error("매장번호 조회 실패:", error);
             }
         };
 
         if (uuid) {
-        fetchStoreBusinessId();
+            fetchStoreBusinessId();
         }
     }, [uuid]);
 
+    // const [tab, setTab] = useState("report");
+
+    // const handleTabChange = async (newTab) => {
+    //     if (newTab === "report") {
+    //         try {
+    //             const store_business_number = localStorage.getItem("store_business_number");
+    //             if (!store_business_number) {
+    //                 alert("사업자 번호가 없습니다. 다시 로그인 해주세요.");
+    //                 return;
+    //             }
+    //             const payload = {
+    //                 store_business_id : store_business_number
+    //             }
+    //             const response = await axios.post(
+    //                 `${process.env.REACT_APP_FASTAPI_REPORT_URL}/report/get/store/uuid`,
+    //                 payload,
+    //                 {
+    //                     headers: { 'Content-Type': 'application/json' },
+    //                 }
+    //             );
+
+    //             const { uuid } = response.data;
+
+    //             const REPORT_URL = `${process.env.REACT_APP_REPORT}/wizmarket/report/${uuid}`;
+
+    //             window.location.href = REPORT_URL;
+    //         } catch (error) {
+    //             console.error("리포트 열기 실패:", error);
+    //             alert("리포트 조회 중 오류가 발생했습니다.");
+    //         }
+    //     } else {
+    //         setTab(newTab);
+    //     }
+    // };
 
     const [store_business_id, set_store_business_id] = useState(null);
     const dispatch = useDispatch();
@@ -411,19 +446,19 @@ const Report = React.memo(() => {
                         {renderSection(StoreInfo, 'storeInfo', { storeInfo: states.data.storeInfo, storeInfoRedux })}
                     </section>
 
-                    {/* ---매장 상세정보--- */}    
+                    {/* ---매장 상세정보--- */}
                     {/* {!states.error.storeDescription && !states.loading.storeDescription && states.data.storeDescription?.length > 0 && (
                         <section className="px-1 py-1">
                             {renderSection(StoreDescription, 'storeDescription', { storeDescriptions: states.data.storeDescription })}
                         </section>
                     )} */}
-                    
+
                     {/* ---입지점수--- */}
                     <section className="px-1 py-1">
                         {renderSection(LocInfoAvgJscore, 'locInfoAvgJscore', { locInfoAvgJscore: states.data.locInfoAvgJscore, storeInfoRedux })}
                     </section>
 
-                    
+
 
                     {/* <section className="px-1 py-1">
                         {renderSection(StorePromotion, 'storeInfo', { storeInfo: states.data.storeInfo, storeInfoRedux })}
@@ -513,13 +548,13 @@ const Report = React.memo(() => {
                         {renderSection(CommercialDistrictAvgJScore, 'commercialDistrictAvgJscore', { commercialDistrictAvgJscore: states.data.commercialDistrictAvgJscore, storeInfoRedux })}
                     </section> */}
 
-                    
+
 
                     {/* <section className="px-1 py-1">
                         // {renderSection(CommercialDistirctJScore, 'commercialDistrictJscore', { commercialDistrictJscore: states.data.commercialDistrictJscore, storeInfoRedux })}
                     </section> */}
 
-                    
+
                     {/* ---요일별 매출평균--- */}
                     <section className="px-1 py-1">
                         {renderSection(CommercialDistrictWeekdaySales, 'commercialDistrictWeekdaySales', { commercialDistrictWeekdaySales: states.data.commercialDistrictWeekdaySales, storeInfoRedux })}
@@ -544,6 +579,9 @@ const Report = React.memo(() => {
                     <section className="px-1 py-1">
                         {renderSection(LocTourInfo, 'locTourInfo', { locTourInfo: states.data.locTourInfo, storeInfoRedux })}
                     </section>
+                    {/* <div className="fixed bottom-0 left-0 w-full px-6 flex gap-4 bg-white py-2">
+                        <MenuBar tab={tab} setTab={handleTabChange} />
+                    </div> */}
 
                     <section className="px-1 py-1">
                         <Footer />

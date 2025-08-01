@@ -1,14 +1,15 @@
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper/modules';
-
+import { X } from "lucide-react";
 // Swiper styles
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+import { useNavigate } from "react-router-dom";
 
 const StoreInfo = ({ storeInfo, storeInfoRedux }) => {
-
+    const navigate = useNavigate();
     if (!storeInfo) {
         return (
             <div className="p-4 bg-white">
@@ -70,7 +71,7 @@ const StoreInfo = ({ storeInfo, storeInfoRedux }) => {
                                 }}
                             >
                                 {/* 상단 그라데이션 */}
-                                <div className="absolute inset-x-0 bottom-0 h-[50%] bg-gradient-to-t from-black via-black/50 to-transparent"/>
+                                <div className="absolute inset-x-0 bottom-0 h-[50%] bg-gradient-to-t from-black via-black/50 to-transparent" />
                                 {/* 하단 그라데이션 */}
                                 <div className="absolute inset-x-0 bottom-0 h-[45%] bg-gradient-to-t from-black via-black/80 to-transparent" />
                             </div>
@@ -78,8 +79,8 @@ const StoreInfo = ({ storeInfo, storeInfoRedux }) => {
                     ))}
                 </Swiper>
 
-                <div 
-                    className="absolute left-0 right-0 top-0 z-[5]" 
+                <div
+                    className="absolute left-0 right-0 top-0 z-[5]"
                     style={{
                         height: '5%',
                         background: 'linear-gradient(to bottom, rgb(0,0,0) 0%, rgb(0,0,0) 30%, rgba(0,0,0,0.9) 50%, rgba(0,0,0,0.7) 70%, rgba(0,0,0,0) 100%)',
@@ -87,15 +88,15 @@ const StoreInfo = ({ storeInfo, storeInfoRedux }) => {
                     }}
                 />
 
-                <div 
-                    className="absolute left-0 right-0 bottom-0 z-[5]" 
+                <div
+                    className="absolute left-0 right-0 bottom-0 z-[5]"
                     style={{
                         height: '15%',
                         background: 'linear-gradient(to top, rgb(0,0,0) 0%, rgb(0,0,0) 30%, rgba(0,0,0,0.9) 50%, rgba(0,0,0,0.7) 70%, rgba(0,0,0,0) 100%)',
                         pointerEvents: 'none'
                     }}
-               />
-            
+                />
+
                 {/* 텍스트 컨텐츠 */}
                 <div className='absolute z-[6] px-4 text-white bottom-4 left-0 right-0'>
                     <div className="flex gap-2 items-center flex-nowrap">
@@ -112,8 +113,16 @@ const StoreInfo = ({ storeInfo, storeInfoRedux }) => {
                         {floor_info ? `${floor_info}층` : ""}
                     </p>
                 </div>
+                <div className="w-28 absolute top-4 left-2 flex flex-col items-center z-[6]">
+                    <button
+                        onClick={() => navigate(-1)}
+                        className="absolute top-1 left-1"
+                    >
+                        <X size={24} color="black" />
+                    </button>
+                </div>
 
-                <div className="w-28 absolute top-4 right-2 flex flex-col items-center z-[6]">
+                <div className="w-28 absolute top-2 right-2 flex flex-col items-center z-[6]">
                     <div className="w-20 h-20">
                         <img
                             src={`http://openweathermap.org/img/wn/${weatherInfo.icon}@2x.png`}
@@ -126,26 +135,26 @@ const StoreInfo = ({ storeInfo, storeInfoRedux }) => {
                     <p className='text-gray-300 text-xs absolute bottom-[-38px]'>{format_current_datetime}</p>
                 </div>
             </div>
-{false &&(
-            <div className="bg-black px-4 py-4">
-                {/* <div className=""> */}
-                {/* <div className="flex justify-center pt-4 pb-2">
+            {false && (
+                <div className="bg-black px-4 py-4">
+                    {/* <div className=""> */}
+                    {/* <div className="flex justify-center pt-4 pb-2">
                         <div className="w-6 h-auto">
                             <img src="/assets/component/advice_icon.png" alt="Wiz-advice_icon" className='block w-full h-auto' />
                         </div>
                     </div> */}
-                <div className="p-4 rounded-2xl" style={{ background: 'linear-gradient(to right, #6B78E8, #C67AF7)' }}>
-                    <p className="text-white text-base font-bold" dangerouslySetInnerHTML={{ __html: store_info_advice.replace(/\n/g, "<br />") }}></p>
-                    {/* <p className="text-white text-base font-bold pb-2" >오늘의 장사지수 : 41%</p> */}
-                    {/* <p className="text-white text-base leading-5">오늘은 추운 날씨와 월요일로 인해 30-40대 남성고객 유동인구수가 적어 유입이 많지 않을 것으로 보입니다.</p> */}
-                </div>
+                    <div className="p-4 rounded-2xl" style={{ background: 'linear-gradient(to right, #6B78E8, #C67AF7)' }}>
+                        <p className="text-white text-base font-bold" dangerouslySetInnerHTML={{ __html: store_info_advice.replace(/\n/g, "<br />") }}></p>
+                        {/* <p className="text-white text-base font-bold pb-2" >오늘의 장사지수 : 41%</p> */}
+                        {/* <p className="text-white text-base leading-5">오늘은 추운 날씨와 월요일로 인해 30-40대 남성고객 유동인구수가 적어 유입이 많지 않을 것으로 보입니다.</p> */}
+                    </div>
 
-                {/* </div> */}
-                {/* <div className="px-4 py-2 cursor-pointer" onClick={(e) => handleLinkClick(e, store_business_number)}>
+                    {/* </div> */}
+                    {/* <div className="px-4 py-2 cursor-pointer" onClick={(e) => handleLinkClick(e, store_business_number)}>
                     <img src="/assets/component/wizAD.png" alt="Wiz-advice_icon" className='block w-full h-auto' />
                 </div> */}
-            </div>
-)}
+                </div>
+            )}
 
         </div>
     );
