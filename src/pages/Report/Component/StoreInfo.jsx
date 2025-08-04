@@ -113,14 +113,7 @@ const StoreInfo = ({ storeInfo, storeInfoRedux }) => {
                         {floor_info ? `${floor_info}층` : ""}
                     </p>
                 </div>
-                <div className="w-28 absolute top-4 left-2 flex flex-col items-center z-[6]">
-                    <button
-                        onClick={() => navigate(-1)}
-                        className="absolute top-1 left-1"
-                    >
-                        <X size={24} color="black" />
-                    </button>
-                </div>
+
 
                 <div className="w-28 absolute top-2 right-2 flex flex-col items-center z-[6]">
                     <div className="w-20 h-20">
