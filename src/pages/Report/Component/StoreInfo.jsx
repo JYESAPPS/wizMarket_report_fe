@@ -1,15 +1,15 @@
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper/modules';
-import { X } from "lucide-react";
+
 // Swiper styles
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-import { useNavigate } from "react-router-dom";
+
 
 const StoreInfo = ({ storeInfo, storeInfoRedux }) => {
-    const navigate = useNavigate();
+
     if (!storeInfo) {
         return (
             <div className="p-4 bg-white">
