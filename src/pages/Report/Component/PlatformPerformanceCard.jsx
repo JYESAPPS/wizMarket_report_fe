@@ -60,13 +60,13 @@ const PlatformPerformanceCard = () => {
 
     return (
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-            <h2 className="text-xl font-semibold text-gray-800 mb-6">플랫폼 성과 지표</h2>
+            {/* <h2 className="text-xl font-semibold text-gray-800 mb-6">플랫폼 성과 지표</h2> */}
             
             <div className="space-y-4">
                 {platformData.map((platform, index) => (
-                    <div key={index} className="flex items-center space-x-4 p-4 bg-gray-50 rounded-lg">
+                    <div key={index} className="flex items-center space-x-1 p-2 bg-gray-50 rounded-lg">
                         {/* 플랫폼 로고 */}
-                        <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0">
+                        <div className="w-6 h-6 rounded-lg flex items-center justify-center flex-shrink-0">
                             <img 
                                 src={platform.logo} 
                                 alt="platform logo" 
@@ -81,7 +81,7 @@ const PlatformPerformanceCard = () => {
                                     <div className="text-xs text-gray-600 mb-1">
                                         {metric.label}
                                     </div>
-                                    <div className="text-2xl font-bold text-gray-900">
+                                    <div className="text-sm font-semibold text-black">
                                         {metric.value}
                                     </div>
                                     {/* 구분선 */}
