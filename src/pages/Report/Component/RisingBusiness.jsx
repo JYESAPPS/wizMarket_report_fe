@@ -11,13 +11,13 @@ const RisingBusiness = ({ risingBusiness, storeInfoRedux }) => {
     }
 
     // 전국 TOP5 및 지역 TOP3 데이터 추출
-    // const nationwide_top5 = [
-    //     risingBusiness.rising_business_data.rising_business_national_rising_sales_top1_info,
-    //     risingBusiness.rising_business_data.rising_business_national_rising_sales_top2_info,
-    //     risingBusiness.rising_business_data.rising_business_national_rising_sales_top3_info,
-    //     risingBusiness.rising_business_data.rising_business_national_rising_sales_top4_info,
-    //     risingBusiness.rising_business_data.rising_business_national_rising_sales_top5_info,
-    // ];
+    const nationwide_top5 = [
+        risingBusiness.rising_business_data.rising_business_national_rising_sales_top1_info,
+        risingBusiness.rising_business_data.rising_business_national_rising_sales_top2_info,
+        risingBusiness.rising_business_data.rising_business_national_rising_sales_top3_info,
+        risingBusiness.rising_business_data.rising_business_national_rising_sales_top4_info,
+        risingBusiness.rising_business_data.rising_business_national_rising_sales_top5_info,
+    ];
 
     const sub_district_top3_data = [
         risingBusiness.rising_business_data.rising_business_sub_district_rising_sales_top1_info,
@@ -31,9 +31,9 @@ const RisingBusiness = ({ risingBusiness, storeInfoRedux }) => {
         <div className='bg-white p-4 rounded-md tracking-tight shadow-md shadow-black-500'>
             <p className="text-sm text-black text-opacity-70">{formatDateYM(nice_biz_map_data_ref_date)}</p>
             <div className="pb-10">
-                {/* <h2 className="text-xl font-bold mb-4">최근 뜨는 점포업종은?</h2> */}
+                <h2 className="text-xl font-bold mb-4">최근 뜨는 점포업종은?</h2>
 
-                {/* {nationwide_top5.length > 0 ? (
+                {nationwide_top5.length > 0 ? (
                     <div className="mb-6">
                         <h3 className="text-lg font-semibold pb-2">전국 매출 증가 업종 TOP5</h3>
                         {nationwide_top5.map((item, index) => {
@@ -54,7 +54,7 @@ const RisingBusiness = ({ risingBusiness, storeInfoRedux }) => {
                     </div>
                 ) : (
                     <div className="">Top5 데이터 오류</div>
-                )} */}
+                )}
 
                 {sub_district_top3_data.length > 0 ? (
                     <div className='div-underline'>

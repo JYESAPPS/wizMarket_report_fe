@@ -1,3 +1,5 @@
+// 리포트 수정전 원본파일
+
 import React, { useEffect, useState, useCallback, useMemo } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';

@@ -1,11 +1,11 @@
-// 풀무원 커스텀
-
+// Wiz App 커스텀
+ 
 import React, { useEffect, useState, useCallback, useMemo } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchStoreInfo } from '../../stores/storeInfoSlice';
 import axios from "axios";
-import StoreInfo from "./Component/StoreInfo";
+// import StoreInfo from "./Component/StoreInfo";
 // import RisingMenu from "./Component/RisingMenu";
 import CommercialDistrict from "./Component/CommercialDistrict";
 // import CommonInformation from "./Component/CommonInformation";
@@ -20,14 +20,15 @@ import CommercialDistrictMainCategoryCount from "./Component/CommercialDistrictM
 // import CommercialDistirctJScore from "./Component/CommercialDistirctJScore";
 import CommercialDistrictWeekdaySales from "./Component/CommercialDistrictWeekdaySales";
 import CommercialDistrictTimeSales from "./Component/CommercialDistrictTimeSales";
-import CommercialDistrictRisingSales from "./Component/CommercialDistrictRisingSales";
+//import CommercialDistrictRisingSales from "./Component/CommercialDistrictRisingSales";
 import LocInfoHotPlace from "./Component/LocInfoHotPlace";
-// import RisingBusiness from "./Component/RisingBusiness";
+import RisingBusiness from "./Component/RisingBusiness";
+import PlatformPerformanceCard from "./Component/PlatformPerformanceCard";
 import Footer from "./Component/Footer";
 // import StoreDescription from "./Component/StoreDescription";
 // import StoreCategoryDescription from "./Component/StoreCategoryDescription";
-import LocTourInfo from "./Component/LocTourInfo";
-import RoadEventInfo from "./Component/RoadEventInfo";
+// import LocTourInfo from "./Component/LocTourInfo";
+// import RoadEventInfo from "./Component/RoadEventInfo";
 // import Ad1 from "./Component/AD1";
 // import Ad2 from "./Component/Ad2";
 // import Ad3 from "./Component/Ad3";
@@ -443,10 +444,21 @@ const Report = React.memo(() => {
     return (
         <ErrorBoundary>
             <main className="report bg-gray-100 flex justify-center">
-                <div className="w-full">
-                    <section className="">
-                        {renderSection(StoreInfo, 'storeInfo', { storeInfo: states.data.storeInfo, storeInfoRedux })}
+                <div className="w-full px-4">
+                    {/* ---페이지 제목--- */}
+                    <section className="px-4 py-4">
+                        <h1 className="text-3xl font-medium text-left text-black">AI 리포트</h1>
                     </section>
+
+                    {/* ---플랫폼 성과 지표--- */}
+                    <section className="px-4 py-4">
+                        <PlatformPerformanceCard />
+                    </section>
+
+                    {/* ---매장 info--- */}
+                    {/* <section className="">
+                        {renderSection(StoreInfo, 'storeInfo', { storeInfo: states.data.storeInfo, storeInfoRedux })}
+                    </section> */}
 
                     {/* ---매장 상세정보--- */}
                     {/* {!states.error.storeDescription && !states.loading.storeDescription && states.data.storeDescription?.length > 0 && (
@@ -455,8 +467,13 @@ const Report = React.memo(() => {
                         </section>
                     )} */}
 
+                    {/* ---매출 증가 업종 TOP3--- */}
+                    <section className="px-4 py-4">
+                        {renderSection(RisingBusiness, 'risingBusiness', { risingBusiness: states.data.risingBusiness, storeInfoRedux })}
+                    </section>
+
                     {/* ---입지점수--- */}
-                    <section className="px-1 py-1">
+                    <section className="px-4 py-4">
                         {renderSection(LocInfoAvgJscore, 'locInfoAvgJscore', { locInfoAvgJscore: states.data.locInfoAvgJscore, storeInfoRedux })}
                     </section>
 
@@ -467,12 +484,12 @@ const Report = React.memo(() => {
                     </section> */}
 
                     {/* ---유동인구--- */}
-                    <section className="px-1 py-1">
+                    <section className="px-4 py-4">
                         {renderSection(LocInfoMovePop, 'locInfoMovePop', { locInfoMovePop: states.data.locInfoMovePop, storeInfoRedux })}
                     </section>
 
                     {/* ---지역 경제 특성--- */}
-                    <section className="px-1 py-1">
+                    <section className="px-4 py-4">
                         {renderSection(PopulationJscore, 'population', { population: states.data.population, storeInfoRedux })}
                     </section>
 
@@ -484,12 +501,12 @@ const Report = React.memo(() => {
 
 
                     {/* ---인구 분포--- */}
-                    <section className="px-1 py-1">
+                    <section className="px-4 py-4">
                         {renderSection(Population, 'population', { population: states.data.population, storeInfoRedux })}
                     </section>
 
                     {/* ---주거 환경--- */}
-                    <section className="px-1 py-1">
+                    <section className="px-4 py-4">
                         {renderSection(PopulationResidentWork, 'populationResidentWork', { populationResidentWork: states.data.populationResidentWork, storeInfoRedux })}
                     </section>
 
@@ -505,24 +522,24 @@ const Report = React.memo(() => {
                     </section> */}
 
                     {/* ---실시간 교통상황--- */}
-                    {states.data.roadEventInfo?.body?.items?.length > 0 && (
+                    {/* {states.data.roadEventInfo?.body?.items?.length > 0 && (
                         <section className="px-1 py-1">
                             {renderSection(RoadEventInfo, 'roadEventInfo', { roadEventInfo: states.data.roadEventInfo, storeInfoRedux })}
                         </section>
-                    )}
+                    )} */}
 
                     {/* ---핫플레이스--- */}
-                    <section className="px-1 py-1">
+                    <section className="px-4 py-4">
                         {renderSection(LocInfoHotPlace, 'locInfoHotPlace', { locInfoHotPlace: states.data.locInfoHotPlace, storeInfoRedux })}
                     </section>
 
                     {/* ---업종별 분포--- */}
-                    <section className="px-1 py-1">
+                    <section className="px-4 py-4">
                         {renderSection(CommercialDistrictMainCategoryCount, 'commercialDistrictMainCategory', { commercialDistrictMainCategory: states.data.commercialDistrictMainCategory, storeInfoRedux })}
                     </section>
 
                     {/* ---우리 동네 매장 평균--- */}
-                    <section className="px-1 py-1">
+                    <section className="px-4 py-4">
                         {renderSection(CommercialDistrict, 'commercialDistrict', { commercialDistrict: states.data.commercialDistrict, commercialDistrictJscore: states.data.commercialDistrictJscore, storeInfoRedux })}
                     </section>
 
@@ -558,34 +575,29 @@ const Report = React.memo(() => {
 
 
                     {/* ---요일별 매출평균--- */}
-                    <section className="px-1 py-1">
+                    <section className="px-4 py-4">
                         {renderSection(CommercialDistrictWeekdaySales, 'commercialDistrictWeekdaySales', { commercialDistrictWeekdaySales: states.data.commercialDistrictWeekdaySales, storeInfoRedux })}
                     </section>
 
                     {/* ---시간대별 매출평균--- */}
-                    <section className="px-1 py-1">
+                    <section className="px-4 py-4">
                         {renderSection(CommercialDistrictTimeSales, 'commercialDistrictTimeSales', { commercialDistrictTimeSales: states.data.commercialDistrictTimeSales, storeInfoRedux })}
                     </section>
 
                     {/* ---우리지역에서 가장 잘되는 곳?--- */}
-                    <section className="px-1 py-1">
-                        {renderSection(CommercialDistrictRisingSales, 'commercialRisingSales', { commercialRisingSales: states.data.commercialRisingSales, storeInfoRedux })}
-                    </section>
-
-                    {/* ---매출 증가 업종 TOP3--- */}
                     {/* <section className="px-1 py-1">
-                        {renderSection(RisingBusiness, 'risingBusiness', { risingBusiness: states.data.risingBusiness, storeInfoRedux })}
+                        {renderSection(CommercialDistrictRisingSales, 'commercialRisingSales', { commercialRisingSales: states.data.commercialRisingSales, storeInfoRedux })}
                     </section> */}
 
                     {/* ---매창 근처에는 무엇이 있을까?--- */}
-                    <section className="px-1 py-1">
+                    {/* <section className="px-1 py-1">
                         {renderSection(LocTourInfo, 'locTourInfo', { locTourInfo: states.data.locTourInfo, storeInfoRedux })}
-                    </section>
+                    </section> */}
                     {/* <div className="fixed bottom-0 left-0 w-full px-6 flex gap-4 bg-white py-2">
                         <MenuBar tab={tab} setTab={handleTabChange} />
                     </div> */}
 
-                    <section className="px-1 py-1">
+                    <section className="px-4 py-4">
                         <Footer />
                     </section>
                 </div>
