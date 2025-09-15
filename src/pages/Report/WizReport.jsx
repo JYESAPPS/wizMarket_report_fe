@@ -467,7 +467,7 @@ const Report = React.memo(() => {
                         </section>
                     )} */}
 
-                    {/* ---매출 증가 업종 TOP3--- */}
+                    {/* ---전국 매출 증가 TOP5 / 해당 지역 매출 증가 TOP3--- */}
                     <section className="px-4 py-4">
                         {renderSection(RisingBusiness, 'risingBusiness', { risingBusiness: states.data.risingBusiness, storeInfoRedux })}
                     </section>
@@ -476,8 +476,6 @@ const Report = React.memo(() => {
                     <section className="px-4 py-4">
                         {renderSection(LocInfoAvgJscore, 'locInfoAvgJscore', { locInfoAvgJscore: states.data.locInfoAvgJscore, storeInfoRedux })}
                     </section>
-
-
 
                     {/* <section className="px-1 py-1">
                         {renderSection(StorePromotion, 'storeInfo', { storeInfo: states.data.storeInfo, storeInfoRedux })}
@@ -498,7 +496,6 @@ const Report = React.memo(() => {
                             {renderSection(LocInfoJScore, 'locInfo', { locInfo: states.data.locInfo, storeInfoRedux })}
                         </section>
                     */}
-
 
                     {/* ---인구 분포--- */}
                     <section className="px-4 py-4">
@@ -566,8 +563,6 @@ const Report = React.memo(() => {
                     {/* <section className="px-1 py-1">
                         {renderSection(CommercialDistrictAvgJScore, 'commercialDistrictAvgJscore', { commercialDistrictAvgJscore: states.data.commercialDistrictAvgJscore, storeInfoRedux })}
                     </section> */}
-
-
 
                     {/* <section className="px-1 py-1">
                         // {renderSection(CommercialDistirctJScore, 'commercialDistrictJscore', { commercialDistrictJscore: states.data.commercialDistrictJscore, storeInfoRedux })}

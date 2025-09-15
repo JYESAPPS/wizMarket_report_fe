@@ -41,12 +41,12 @@ const RisingBusiness = ({ risingBusiness, storeInfoRedux }) => {
                             return (
                                 <div key={index} className="pb-2 flex justify-between gap-4">
                                     <p className='text-md truncate'>
-                                        <span className="font-bold text-blue-500">{index + 1}. </span>
-                                        <span>{district_name} {sub_district_name} | </span>
+                                        <span className="font-semibold text-blue-500">{index + 1} </span>
+                                        <span className="pl-3">{district_name} {sub_district_name} | </span>
                                         <span>{biz_detail_category_name === "소분류없음" ? '뜨는 업종이 없습니다.' : biz_detail_category_name}</span>
                                     </p>
                                     <p>
-                                        <span className="font-bold text-blue-500">{parseFloat(growth_rate).toFixed(1)}%</span>
+                                        <span className="font-semibold text-blue-500">{parseFloat(growth_rate).toFixed(1)}%</span>
                                     </p>
                                 </div>
                             );
@@ -66,12 +66,12 @@ const RisingBusiness = ({ risingBusiness, storeInfoRedux }) => {
                             return (
                                 <div key={index} className="pb-2 flex justify-between">
                                     <p className='text-md'>
-                                        <span className="font-bold text-blue-500">{index + 1}. </span>
-                                        <span>{district_name} {sub_district_name} | </span>
+                                        <span className="font-semibold text-blue-500">{index + 1} </span>
+                                        <span className="pl-3">{district_name} {sub_district_name} | </span>
                                         <span>{biz_detail_category_name === "소분류없음" ? '뜨는 업종이 없습니다.' : biz_detail_category_name}</span>
                                     </p>
                                     <p>
-                                        <span className="font-bold text-blue-500">{parseFloat(growth_rate).toFixed(1)}%</span>
+                                        <span className="font-semibold text-blue-500">{parseFloat(growth_rate).toFixed(1)}%</span>
                                     </p>
                                 </div>
                             );
