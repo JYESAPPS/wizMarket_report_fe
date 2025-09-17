@@ -1,5 +1,5 @@
 // Wiz App 커스텀
- 
+
 import React, { useEffect, useState, useCallback, useMemo } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
@@ -151,7 +151,7 @@ const Report = React.memo(() => {
             risingBusiness: true,
             storeDescription: true,
             storeCategoryDescription: true,
-            locTourInfo: true,
+            // locTourInfo: true,
             roadEventInfo: true,
             locInfoHotPlace: true,
         },
@@ -174,7 +174,7 @@ const Report = React.memo(() => {
             risingBusiness: null,
             storeDescription: null,
             storeCategoryDescription: null,
-            locTourInfo: null,
+            // locTourInfo: null,
             roadEventInfo: null,
             locInfoHotPlace: null,
         },
@@ -197,7 +197,7 @@ const Report = React.memo(() => {
             risingBusiness: null,
             storeDescription: null,
             storeCategoryDescription: null,
-            locTourInfo: null,
+            // locTourInfo: null,
             roadEventInfo: null,
             locInfoHotPlace: null,
         }
@@ -278,10 +278,10 @@ const Report = React.memo(() => {
                 key: 'commercialRisingSales',
                 url: `${process.env.REACT_APP_FASTAPI_BASE_URL}/report/commercialDistrict/rising/sales`
             },
-            {
-                key: 'locTourInfo',
-                url: `${process.env.REACT_APP_FASTAPI_BASE_URL}/report/local/tour/info`
-            },
+            // {
+            //     key: 'locTourInfo',
+            //     url: `${process.env.REACT_APP_FASTAPI_BASE_URL}/report/local/tour/info`
+            // },
             {
                 key: 'roadEventInfo',
                 url: `${process.env.REACT_APP_FASTAPI_BASE_URL}/report/local/road/info`
@@ -440,18 +440,50 @@ const Report = React.memo(() => {
         return states.data[key] ? <Component {...states.data[key]} {...additionalProps} /> : null;
     }, [states]);
 
+    // 헤더 표시에 사용할 매장명/업종명
+    const storeName = states?.data?.storeInfo?.localStoreInfo?.store_name || '';
+    const categoryName = storeInfoRedux?.detail_category_name || storeInfoRedux?.biz_detail_category_rep_name || '';
 
     return (
         <ErrorBoundary>
             <main className="report bg-gray-100 flex justify-center">
                 <div className="w-full px-4">
-                    {/* ---페이지 제목--- */}
-                    <section className="px-4 py-4">
-                        <h1 className="text-3xl font-medium text-left text-black">AI 리포트</h1>
+                    {/* ---상단 Wiz 리포트 헤더--- */}
+                    <section className="py-6 px-4">
+                        {/* 로고 */}
+                        <div className="flex items-center gap-3">
+                            <div className="w-28 sm:w-32">
+                                <img src="/assets/component/reportWizLogo.png" alt="Wiz" className="block w-full h-auto" />
+                            </div>
+                            <span className="text-3xl sm:text-3xl font-normal text-black">
+                                리포트
+                            </span>
+                        </div>
+                        
+                        {/* 매장명 / 업종 */}
+                        <div className="mt-8">
+                            {storeName && (
+                                <h1 className="text-3xl sm:text-3xl font-semibold text-left text-black">{storeName}</h1>
+                            )}
+                            {categoryName && (
+                                <p className="text-sm sm:text-base text-gray-600 mt-2">· 등록한 업종: {categoryName}</p>
+                            )}
+                        </div>
+                        
+                        {/* 구분선 */}
+                        <div className="h-px w-full bg-gray-300 my-6"></div>
+
+                        {/* 마케팅 효과분석 소개 */}
+                        <div className="mt-8">
+                            <h2 className="text-lg sm:text-xl font-semibold text-black">마케팅 효과분석</h2>
+                            <p className="text-gray-600 text-sm sm:text-base mt-2">
+                                wizMarket AI리포트는 AI, 빅데이터를 기반으로 한 자체 마케팅 효과분석 솔루션을 적용하여 마케팅 효과 분석을 제공하고 있습니다.
+                            </p>
+                        </div>
                     </section>
 
                     {/* ---플랫폼 성과 지표--- */}
-                    <section className="px-4 py-4">
+                    <section className="py-4 px-4">
                         <PlatformPerformanceCard />
                     </section>
 

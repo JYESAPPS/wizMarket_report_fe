@@ -39,7 +39,7 @@ const PlatformPerformanceCard = () => {
             ]
         },
         {
-            logo: "/assets/component/Xlogo.png",
+            logo: "/assets/component/xLogo.png",
             metrics: [
                 { label: "포스팅 수", value: "25.7K" },
                 { label: "팔로워 수", value: "25.7K" },
@@ -58,11 +58,31 @@ const PlatformPerformanceCard = () => {
         }
     ];
 
+    // 부제용 날짜 계산: 현재 기준 이전 달 표기
+    const now = new Date();
+    const prevMonth = new Date(now.getFullYear(), now.getMonth() - 1, 1);
+    const yyyy = prevMonth.getFullYear();
+    const mm = String(prevMonth.getMonth() + 1).padStart(2, '0');
+    const subtitleText = `${yyyy}-${mm}월 마케팅은 지난달 대비 효과가 낮습니다.`;
+
     return (
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
             {/* <h2 className="text-xl font-semibold text-gray-800 mb-6">플랫폼 성과 지표</h2> */}
             
-            <div className="space-y-4">
+            {/* MEI 상단 카드 */}
+            <section aria-label="MEI 요약 카드" className="">
+                <h3 className="text-lg md:text-xl font-semibold text-gray-800">마케팅 효과지수(MEI) 추이</h3>
+                <p className="text-sm md:text-base text-gray-600 mt-1">{subtitleText}</p>
+                <div className="mt-3 md:mt-4">
+                    <img 
+                        src="/assets/component/MEI.png" 
+                        alt="MEI trend chart" 
+                        className="w-full rounded-lg shadow-sm object-contain" 
+                    />
+                </div>
+            </section>
+
+            <div className="space-y-4 mt-4">
                 {platformData.map((platform, index) => (
                     <div key={index} className="flex items-center space-x-1 p-2 bg-gray-50 rounded-lg">
                         {/* 플랫폼 로고 */}
