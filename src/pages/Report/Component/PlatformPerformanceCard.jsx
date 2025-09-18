@@ -72,8 +72,8 @@ const PlatformPerformanceCard = () => {
             {/* MEI 상단 카드 */}
             <section aria-label="MEI 요약 카드" className="">
                 <h3 className="text-lg md:text-xl font-semibold text-gray-800">마케팅 효과지수(MEI) 추이</h3>
-                <p className="text-sm md:text-base text-gray-600 mt-1">{subtitleText}</p>
-                <div className="mt-3 md:mt-4">
+                <p className="text-sm font-medium md:text-base text-gray-800 mt-1">{subtitleText}</p>
+                <div className="mt-4 md:mt-4">
                     <img 
                         src="/assets/component/MEI.png" 
                         alt="MEI trend chart" 

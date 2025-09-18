@@ -466,7 +466,7 @@ const Report = React.memo(() => {
                                 <h1 className="text-3xl sm:text-3xl font-semibold text-left text-black">{storeName}</h1>
                             )}
                             {categoryName && (
-                                <p className="text-sm sm:text-base text-gray-600 mt-2">· 등록한 업종: {categoryName}</p>
+                                <p className="text-base sm:text-base text-gray-800 mt-2">· 등록한 업종 : {categoryName}</p>
                             )}
                         </div>
                         
@@ -476,7 +476,7 @@ const Report = React.memo(() => {
                         {/* 마케팅 효과분석 소개 */}
                         <div className="mt-8">
                             <h2 className="text-lg sm:text-xl font-semibold text-black">마케팅 효과분석</h2>
-                            <p className="text-gray-600 text-sm sm:text-base mt-2">
+                            <p className="text-gray-800 text-base sm:text-base mt-2">
                                 wizMarket AI리포트는 AI, 빅데이터를 기반으로 한 자체 마케팅 효과분석 솔루션을 적용하여 마케팅 효과 분석을 제공하고 있습니다.
                             </p>
                         </div>
