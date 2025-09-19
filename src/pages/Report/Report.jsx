@@ -57,28 +57,40 @@ class ErrorBoundary extends React.Component {
 }
 
 const Report = React.memo(() => {
-    const { uuid } = useParams();
+    const [uuid, setUuid] = useState("");
 
     useEffect(() => {
-        const fetchStoreBusinessId = async () => {
+        // 1) 쿼리스트링
+        const qs = new URLSearchParams(window.location.search).get("uuid");
+        if (qs) { setUuid(qs); return; }
+
+        // 2) 경로 수동 파싱 (/wizmarket/report/:uuid)
+        const m = window.location.pathname.match(/\/wizmarket\/report\/([^/]+)/);
+        if (m?.[1]) { setUuid(decodeURIComponent(m[1])); return; }
+
+        // 3) 마지막 성공값 폴백(선택)
+        const last = localStorage.getItem("last_report_uuid");
+        if (last) setUuid(last);
+    }, []);
+
+    useEffect(() => {
+        if (!uuid) return;
+        localStorage.setItem("last_report_uuid", uuid); // 다음 폴백용(선택)
+
+        (async () => {
             try {
-                const response = await axios.post(
+                const res = await axios.post(
                     `${process.env.REACT_APP_FASTAPI_BASE_URL}/report/get/uuid/store`,
                     { uuid },
-                    {
-                        headers: { "Content-Type": "application/json" },
-                    }
+                    { headers: { "Content-Type": "application/json" } }
                 );
-                set_store_business_id(response.data.store_business_number);
-            } catch (error) {
-                console.error("매장번호 조회 실패:", error);
+                // set_store_business_id(res.data.store_business_number);
+            } catch (e) {
+                console.error("매장번호 조회 실패:", e);
             }
-        };
-
-        if (uuid) {
-            fetchStoreBusinessId();
-        }
+        })();
     }, [uuid]);
+
 
     // const [tab, setTab] = useState("report");
 
