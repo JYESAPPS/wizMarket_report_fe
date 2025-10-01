@@ -60,6 +60,63 @@ class ErrorBoundary extends React.Component {
 const Report = React.memo(() => {
     const { uuid } = useParams();
 
+    // 페이지 한정: 확대/축소 및 가로 스크롤 방지
+    useEffect(() => {
+        // 기존 viewport 메타 백업 후 잠금 설정
+        const viewportMeta = document.querySelector('meta[name="viewport"]');
+        const prevViewportContent = viewportMeta?.getAttribute('content');
+        if (viewportMeta) {
+            viewportMeta.setAttribute(
+                'content',
+                'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover'
+            );
+        }
+
+        // iOS 핀치 제스처 차단
+        const preventDefault = (e) => {
+            e.preventDefault();
+        };
+
+        // 더블탭 줌 차단
+        let lastTouchEnd = 0;
+        const onTouchEnd = (e) => {
+            const now = Date.now();
+            if (now - lastTouchEnd <= 300) {
+                e.preventDefault();
+            }
+            lastTouchEnd = now;
+        };
+
+        // Ctrl + 휠 줌 차단
+        const onWheel = (e) => {
+            if (e.ctrlKey) {
+                e.preventDefault();
+            }
+        };
+
+        window.addEventListener('gesturestart', preventDefault);
+        window.addEventListener('gesturechange', preventDefault);
+        window.addEventListener('gestureend', preventDefault);
+        window.addEventListener('touchend', onTouchEnd, { passive: false });
+        window.addEventListener('wheel', onWheel, { passive: false });
+
+        // 본 페이지 체류 동안만 가로 스크롤 잠금
+        const prevOverflowX = document.body.style.overflowX;
+        document.body.style.overflowX = 'hidden';
+
+        return () => {
+            window.removeEventListener('gesturestart', preventDefault);
+            window.removeEventListener('gesturechange', preventDefault);
+            window.removeEventListener('gestureend', preventDefault);
+            window.removeEventListener('touchend', onTouchEnd);
+            window.removeEventListener('wheel', onWheel);
+            document.body.style.overflowX = prevOverflowX;
+            if (viewportMeta && typeof prevViewportContent === 'string') {
+                viewportMeta.setAttribute('content', prevViewportContent);
+            }
+        };
+    }, []);
+
     useEffect(() => {
         const fetchStoreBusinessId = async () => {
             try {
@@ -446,7 +503,7 @@ const Report = React.memo(() => {
 
     return (
         <ErrorBoundary>
-            <main className="report bg-gray-100 flex justify-center">
+            <main className="report bg-gray-100 flex justify-center overflow-x-hidden" style={{ touchAction: 'pan-y' }}>
                 <div className="w-full px-4">
                     {/* ---상단 Wiz 리포트 헤더--- */}
                     <section className="py-6 px-4">
