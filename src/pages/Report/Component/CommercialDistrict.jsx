@@ -172,14 +172,14 @@ const CommercialDistrict = ({ commercialDistrict, commercialDistrictJscore, stor
             <div className="">
                 {/* <p className="text-md font-semibold py-4">{storeInfoRedux.sub_district_name} {storeInfoRedux.biz_detail_category_rep_name} 상권분석</p> */}
                 {/* <p className='text-md text-opacity-80 pb-4'>내 점포 사업 요약 <span className='text-xs text-opacity-80'>{formatDate(nice_biz_map_data_ref_date)}</span></p> */}
-                <p className='text-lg font-bold text-opacity-80'>{sub_district_name} {storeInfoRedux.biz_detail_category_rep_name} 매장 평균 <span className='text-xs font-normal text-black text-opacity-70'>{formatDate(nice_biz_map_data_ref_date)} 기준 자료</span></p>
+                {/* <p className='text-lg font-bold text-opacity-80'>{sub_district_name} {storeInfoRedux.biz_detail_category_rep_name} 매장 평균 <span className='text-xs font-normal text-black text-opacity-70'>{formatDate(nice_biz_map_data_ref_date)} 기준 자료</span></p> */}
 
-                {/* 레이더 그래프 - allDataAvailable 조건부 렌더링 */}
+                {/* 레이더 그래프 - allDataAvailable 조건부 렌더링
                 {allDataAvailable && (
                     <div className="w-full h-72 flex justify-center">
                         <Radar data={data} options={options} />
                     </div>
-                )}
+                )} */}
 
                 {/* <div className="text-sm text-gray-500 pt-4">
                                 <div className="flex justify-center">
@@ -216,7 +216,7 @@ const CommercialDistrict = ({ commercialDistrict, commercialDistrictJscore, stor
                     </div>
                 )} */}
 
-                {showSalesScale && (
+                {/* {showSalesScale && (
                     <div className="py-4 text-right">
                         <p className='text-lg font-semibold text-black text-opacity-70'>점포당 매출규모는</p>
                         <p className='text-sm font-normal text-black text-opacity-70'>전월대비
@@ -232,11 +232,11 @@ const CommercialDistrict = ({ commercialDistrict, commercialDistrictJscore, stor
                             : "장사가 안되는 편입니다."}
                         </p>
                     </div>
-                )}
+                )} */}
 
                 {showPaymentAndUsage && (
                     <div className="py-4 text-right">
-                        <p className='text-lg font-semibold text-black text-opacity-70'>평균 객단가는</p>
+                        <p className='text-lg font-semibold text-black text-opacity-70'>평균 결재금액은</p>
                         <p className='text-sm font-normal text-black text-opacity-70'>
                             {commercial_district_national_average_payment > commercial_district_national_usage_count
                                 ? ` 감소추세`
@@ -262,13 +262,13 @@ const CommercialDistrict = ({ commercialDistrict, commercialDistrictJscore, stor
                     </div>
                 )}
 
-                {showDensity && (
+                {/* {showDensity && (
                     <div className="py-4 text-right">
                         <p className='text-lg font-semibold text-black text-opacity-70'>경쟁매장 밀집도는 얼마나</p>
                         <p className='text-[2.5rem] font-bold text-black text-opacity-70'>{commercial_district_sub_district_density_average}%</p>
                         <p className='text-base text-black text-opacity-70'>전국 평균 수치보다 {commercial_district_sub_district_density_average > commercial_district_national_density_average ? "높습니다." : "낮습니다."}</p>
                     </div>
-                )}
+                )} */}
             </div>
         </div>
     );

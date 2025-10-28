@@ -1,7 +1,7 @@
 import React from 'react';
 import formatDateYM from '../../../utils/formatDateYM';
 
-const RisingBusiness = ({ risingBusiness, storeInfoRedux }) => {
+const RisingBusiness = ({ risingBusiness, storeInfoRedux, adviceOnly = false, hideAdvice = false }) => {
     if (!risingBusiness) {
         return (
             <div className="p-4 bg-white">
@@ -27,6 +27,20 @@ const RisingBusiness = ({ risingBusiness, storeInfoRedux }) => {
 
     const {nice_biz_map_data_ref_date} = storeInfoRedux;
 
+    if (adviceOnly) {
+        return (
+            <div className='bg-white p-4 rounded-md tracking-tight shadow-md shadow-black-500'>
+                <div className="flex justify-center">
+                    <div className="w-6 h-auto">
+                        <img src="/assets/component/tip.png" alt="팁 이미지" className='block w-full h-auto' />
+                    </div>
+                </div>
+                <p className='py-4 font-semibold'>업종 트랜드 분석 및 조언</p>
+                <p className="text-lg" dangerouslySetInnerHTML={{ __html: risingBusiness.rising_business_advice.replace(/\n/g, "<br />") }}></p>
+            </div>
+        );
+    }
+
     return (
         <div className='bg-white p-4 rounded-md tracking-tight shadow-md shadow-black-500'>
             <p className="text-sm text-black text-opacity-70">{formatDateYM(nice_biz_map_data_ref_date)}</p>
@@ -41,9 +55,9 @@ const RisingBusiness = ({ risingBusiness, storeInfoRedux }) => {
                             return (
                                 <div key={index} className="pb-2 flex justify-between gap-4">
                                     <p className='text-md truncate'>
-                                        <span className="font-semibold text-blue-500">{index + 1} </span>
-                                        <span className="pl-3">{district_name} {sub_district_name} | </span>
-                                        <span>{biz_detail_category_name === "소분류없음" ? '뜨는 업종이 없습니다.' : biz_detail_category_name}</span>
+                                        <span className="font-semibold text-blue-500">{index + 1}</span>
+                                        <span className="ml-3 font-bold text-lg">{biz_detail_category_name === "소분류없음" ? '뜨는 업종이 없습니다.' : biz_detail_category_name}</span>
+                                        <span className="pl-3">{district_name} {sub_district_name}</span>
                                     </p>
                                     <p>
                                         <span className="font-semibold text-blue-500">{parseFloat(growth_rate).toFixed(1)}%</span>
@@ -67,8 +81,8 @@ const RisingBusiness = ({ risingBusiness, storeInfoRedux }) => {
                                 <div key={index} className="pb-2 flex justify-between">
                                     <p className='text-md'>
                                         <span className="font-semibold text-blue-500">{index + 1} </span>
-                                        <span className="pl-3">{district_name} {sub_district_name} | </span>
-                                        <span>{biz_detail_category_name === "소분류없음" ? '뜨는 업종이 없습니다.' : biz_detail_category_name}</span>
+                                        <span className="ml-3 font-bold text-lg">{biz_detail_category_name === "소분류없음" ? '뜨는 업종이 없습니다.' : biz_detail_category_name}</span>
+                                        {/* <span className="pl-3">{district_name} {sub_district_name}</span> */}
                                     </p>
                                     <p>
                                         <span className="font-semibold text-blue-500">{parseFloat(growth_rate).toFixed(1)}%</span>
@@ -81,17 +95,19 @@ const RisingBusiness = ({ risingBusiness, storeInfoRedux }) => {
                     <div className="">Top3 데이터 오류</div>
                 )}
             </div>
-            <div className="">
-                <div className="flex justify-center">
-                    <div className="w-6 h-auto">
-                        <img src="/assets/component/tip.png" alt="팁 이미지" className='block w-full h-auto' />
+            {!hideAdvice && (
+                <div className="">
+                    <div className="flex justify-center">
+                        <div className="w-6 h-auto">
+                            <img src="/assets/component/tip.png" alt="팁 이미지" className='block w-full h-auto' />
+                        </div>
                     </div>
+                    <p className='py-4 font-semibold'>업종 트랜드 분석 및 조언</p>
+                    <p className="text-lg" dangerouslySetInnerHTML={{ __html: risingBusiness.rising_business_advice.replace(/\n/g, "<br />") }}></p>
                 </div>
-                <p className='py-4 font-semibold'>최근 뜨는 업종을 통한 마켓 트랜드 분석 및 조언</p>
-                <p className="text-lg" dangerouslySetInnerHTML={{ __html: risingBusiness.rising_business_advice.replace(/\n/g, "<br />") }}></p>
-            </div>
+            )}
         </div>
     );
-};
+}
 
 export default RisingBusiness;

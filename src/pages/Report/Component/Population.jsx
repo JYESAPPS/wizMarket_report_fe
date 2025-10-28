@@ -7,7 +7,7 @@ import formatDate from '../../../utils/formatDate';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ChartDataLabels);  // 플러그인 등록
 
-const Population = ({ population, storeInfoRedux }) => {
+const Population = ({ population, storeInfoRedux, adviceOnly = false, hideAdvice = false }) => {
     if (!population) {
         return (
             <div className="p-4 bg-white">
@@ -139,6 +139,22 @@ const Population = ({ population, storeInfoRedux }) => {
     //         ? '남성 인구가 더 많습니다.'
     //         : '여성과 남성 인구가 동일합니다.';
 
+    if (adviceOnly) {
+        return (
+            <div className='bg-white p-4 rounded-lg shadow-md space-y-6'>
+                <div className="pt-4">
+                    <div className="flex justify-center ">
+                        <div className="w-6 h-auto">
+                            <img className='block w-full' src="/assets/component/tip.png" alt="별 이미지" />
+                        </div>
+                    </div>
+                    <p className='text-md font-bold py-2'>연령별 특성 및 응대방법을 제안드립니다.</p>
+                    <p className="text-lg" dangerouslySetInnerHTML={{ __html: population_advice.replace(/\n/g, "<br />") }}></p>
+                </div>
+            </div>
+        );
+    }
+
     return (
         <div className='bg-white p-4 rounded-lg shadow-md space-y-6'>
             <div>
@@ -167,18 +183,19 @@ const Population = ({ population, storeInfoRedux }) => {
                     <PopulationMetric label="소득(만원)" value={loc_info_income_won} jScore={loc_info_income_j_score} />
                 </div>
             </div> */}
-            <div className="">
-                <div className="pt-4">
-                    <div className="flex justify-center ">
-                        <div className="w-6 h-auto">
-                            <img className='block w-full' src="/assets/component/tip.png" alt="별 이미지" />
+            {!hideAdvice && (
+                <div className="">
+                    <div className="pt-4">
+                        <div className="flex justify-center ">
+                            <div className="w-6 h-auto">
+                                <img className='block w-full' src="/assets/component/tip.png" alt="별 이미지" />
+                            </div>
                         </div>
+                        <p className='text-md font-bold py-2'>연령별 특성 및 응대방법을 제안드립니다.</p>
+                        <p className="text-lg" dangerouslySetInnerHTML={{ __html: population_advice.replace(/\n/g, "<br />") }}></p>
                     </div>
-                    <p className='text-md font-bold py-2'>연령별 특성 및 응대방법</p>
-                    <p className="text-lg" dangerouslySetInnerHTML={{ __html: population_advice.replace(/\n/g, "<br />") }}></p>
-
                 </div>
-            </div>
+            )}
         </div>
     );
 };

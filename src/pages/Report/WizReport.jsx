@@ -23,6 +23,8 @@ import CommercialDistrictTimeSales from "./Component/CommercialDistrictTimeSales
 //import CommercialDistrictRisingSales from "./Component/CommercialDistrictRisingSales";
 import LocInfoHotPlace from "./Component/LocInfoHotPlace";
 import RisingBusiness from "./Component/RisingBusiness";
+import AdviceSummary from "./Component/AdviceSummary";
+import CollapsibleSection from "./Component/CollapsibleSection";
 import PlatformPerformanceCard from "./Component/PlatformPerformanceCard";
 import Footer from "./Component/Footer";
 import StoreDescription from "./Component/StoreDescription";
@@ -528,26 +530,34 @@ const Report = React.memo(() => {
                         </div>
                         
                         {/* 구분선 */}
-                        <div className="h-px w-full bg-gray-300 my-6"></div>
+                        <div className="h-px w-full bg-gray-300 my-3"></div>
 
                         {/* 마케팅 효과분석 소개 */}
-                        <div className="mt-8">
+                        {/* <div className="mt-8">
                             <h2 className="text-lg sm:text-xl font-semibold text-black">마케팅 효과분석</h2>
                             <p className="text-gray-800 text-base sm:text-base mt-2">
                                 wizMarket AI리포트는 AI, 빅데이터를 기반으로 한 자체 마케팅 효과분석 솔루션을 적용하여 마케팅 효과 분석을 제공하고 있습니다.
                             </p>
-                        </div>
+                        </div> */}
                     </section>
 
                     {/* ---플랫폼 성과 지표--- */}
-                    <section className="py-4 px-4">
+                    {/* <section className="py-4 px-4">
                         <PlatformPerformanceCard />
+                    </section> */}
+
+                    {/* 매장 운영 AI 팁! 안내문 */}
+                    <section className="px-4 pt-1 pb-3">
+                        <p className="text-black font-semibold">매장 운영 AI 팁!</p>
+                        <p className="text-gray-800 text-base mt-2">
+                            매장운영에 필요한 팁을 AI가 현재 상황을 고려한 초개인화 (Hyper Personalization)엔진을 기반으로 고객님의 매장에 딱 맞는 맞춤형 팁을 제공합니다. (매일 1회 업데이트)
+                        </p>
                     </section>
 
-                    {/* ---매장 info--- */}
-                    {/* <section className="">
-                        {renderSection(StoreInfo, 'storeInfo', { storeInfo: states.data.storeInfo, storeInfoRedux })}
-                    </section> */}
+                    {/* ---장사분석 점수--- */}
+                    <section className="px-4 py-4">
+                        {renderSection(LocInfoAvgJscore, 'locInfoAvgJscore', { locInfoAvgJscore: states.data.locInfoAvgJscore, storeInfoRedux })}
+                    </section>
 
                     {/* ---매장 상세정보--- */}
                     {!states.error.storeDescription && !states.loading.storeDescription && states.data.storeDescription?.length > 0 && (
@@ -556,124 +566,54 @@ const Report = React.memo(() => {
                         </section>
                     )}
 
-                    {/* ---전국 매출 증가 TOP5 / 해당 지역 매출 증가 TOP3--- */}
+                    {/* 조언 요약 섹션(3개 조언을 하나로 묶음) */}
                     <section className="px-4 py-4">
-                        {renderSection(RisingBusiness, 'risingBusiness', { risingBusiness: states.data.risingBusiness, storeInfoRedux })}
+                        <AdviceSummary risingBusiness={states.data.risingBusiness} population={states.data.population} />
                     </section>
 
-                    {/* ---입지점수--- */}
-                    <section className="px-4 py-4">
-                        {renderSection(LocInfoAvgJscore, 'locInfoAvgJscore', { locInfoAvgJscore: states.data.locInfoAvgJscore, storeInfoRedux })}
-                    </section>
-
-                    {/* <section className="px-1 py-1">
-                        {renderSection(StorePromotion, 'storeInfo', { storeInfo: states.data.storeInfo, storeInfoRedux })}
-                    </section> */}
-
-                    {/* ---유동인구--- */}
-                    <section className="px-4 py-4">
-                        {renderSection(LocInfoMovePop, 'locInfoMovePop', { locInfoMovePop: states.data.locInfoMovePop, storeInfoRedux })}
-                    </section>
-
-                    {/* ---지역 경제 특성--- */}
-                    <section className="px-4 py-4">
-                        {renderSection(PopulationJscore, 'population', { population: states.data.population, storeInfoRedux })}
-                    </section>
-
-                    {/* 
-                        <section className="px-1 py-1">
-                            {renderSection(LocInfoJScore, 'locInfo', { locInfo: states.data.locInfo, storeInfoRedux })}
+                    {/* 1섹터: 매장 사업정보 보기 */}
+                    <CollapsibleSection title="매장 사업정보 보기" defaultOpen={false}>
+                        <section className="px-0 py-0">
+                            {renderSection(CommercialDistrict, 'commercialDistrict', { commercialDistrict: states.data.commercialDistrict, commercialDistrictJscore: states.data.commercialDistrictJscore, storeInfoRedux })}
                         </section>
-                    */}
-
-                    {/* ---인구 분포--- */}
-                    <section className="px-4 py-4">
-                        {renderSection(Population, 'population', { population: states.data.population, storeInfoRedux })}
-                    </section>
-
-                    {/* ---주거 환경--- */}
-                    <section className="px-4 py-4">
-                        {renderSection(PopulationResidentWork, 'populationResidentWork', { populationResidentWork: states.data.populationResidentWork, storeInfoRedux })}
-                    </section>
-
-                    {/* ---중간 광고--- */}
-                    {/* <section className="px-1 py-1">
-                        <Ad1 />
-                    </section>
-                    <section className="px-1 py-1">
-                        <Ad2 />
-                    </section>
-                    <section className="px-1 py-1">
-                        <Ad3 />
-                    </section> */}
-
-                    {/* ---실시간 교통상황--- */}
-                    {/* {states.data.roadEventInfo?.body?.items?.length > 0 && (
-                        <section className="px-1 py-1">
-                            {renderSection(RoadEventInfo, 'roadEventInfo', { roadEventInfo: states.data.roadEventInfo, storeInfoRedux })}
+                        <section className="px-0 py-0">
+                            {renderSection(CommercialDistrictTimeSales, 'commercialDistrictTimeSales', { commercialDistrictTimeSales: states.data.commercialDistrictTimeSales, storeInfoRedux })}
                         </section>
-                    )} */}
-
-                    {/* ---핫플레이스--- */}
-                    <section className="px-4 py-4">
-                        {renderSection(LocInfoHotPlace, 'locInfoHotPlace', { locInfoHotPlace: states.data.locInfoHotPlace, storeInfoRedux })}
-                    </section>
-
-                    {/* ---업종별 분포--- */}
-                    <section className="px-4 py-4">
-                        {renderSection(CommercialDistrictMainCategoryCount, 'commercialDistrictMainCategory', { commercialDistrictMainCategory: states.data.commercialDistrictMainCategory, storeInfoRedux })}
-                    </section>
-
-                    {/* ---우리 동네 매장 평균--- */}
-                    <section className="px-4 py-4">
-                        {renderSection(CommercialDistrict, 'commercialDistrict', { commercialDistrict: states.data.commercialDistrict, commercialDistrictJscore: states.data.commercialDistrictJscore, storeInfoRedux })}
-                    </section>
-
-                    {/* ---가장 많이 주문하는 메뉴--- */}
-                    {/* <section className="px-1 py-1">
-                        {renderSection(RisingMenu, 'risingMenu', { risingMenu: states.data.risingMenu, storeInfoRedux })}
-                    </section> */}
-
-                    {/* ---storeCategoryDescription--- */}
-                    {/* {states.data.storeCategoryDescription && states.data.storeCategoryDescription?.length > 0 && (
-                        <section className="px-1 py-1">
-                            {renderSection(StoreCategoryDescription, 'storeCategoryDescription', { storeCategoryDescription: states.data.storeCategoryDescription, storeInfoRedux })}
+                        <section className="px-0 py-0">
+                            {renderSection(CommercialDistrictWeekdaySales, 'commercialDistrictWeekdaySales', { commercialDistrictWeekdaySales: states.data.commercialDistrictWeekdaySales, storeInfoRedux })}
                         </section>
-                    )} */}
+                    </CollapsibleSection>
 
-                    {/* ---공통정보--- */}
-                    {/* {!states.error.commonInfo && !states.loading.commonInfo && states.data.commonInfo?.map((commonReport) => (
-                        <section className="px-1 py-1" key={commonReport.common_information_id}>
-                            {renderSection(CommonInformation, 'commonInfo', { commonReport })}
+                    {/* 2섹터: 매장 트렌드 보기 */}
+                    <CollapsibleSection title="매장 트렌드 보기" defaultOpen={false}>
+                        <section className="px-0 py-0">
+                            {renderSection(RisingBusiness, 'risingBusiness', { risingBusiness: states.data.risingBusiness, storeInfoRedux, hideAdvice: true })}
                         </section>
-                    ))} */}
+                    </CollapsibleSection>
 
-                    {/* ---동네상권--- */}
-                    {/* <section className="px-1 py-1">
-                        {renderSection(CommercialDistrictAvgJScore, 'commercialDistrictAvgJscore', { commercialDistrictAvgJscore: states.data.commercialDistrictAvgJscore, storeInfoRedux })}
-                    </section> */}
+                    {/* 3섹터: 매장주변 입지 정보 보기 */}
+                    <CollapsibleSection title="매장주변 입지 정보 보기" defaultOpen={false}>
+                        <section className="px-0 py-0">
+                            {renderSection(LocInfoMovePop, 'locInfoMovePop', { locInfoMovePop: states.data.locInfoMovePop, storeInfoRedux })}
+                        </section>
+                        <section className="px-0 py-0">
+                            {renderSection(PopulationJscore, 'population', { population: states.data.population, storeInfoRedux, hideAdvice: true })}
+                        </section>
+                        <section className="px-0 py-0">
+                            {renderSection(Population, 'population', { population: states.data.population, storeInfoRedux, hideAdvice: true })}
+                        </section>
+                        <section className="px-0 py-0">
+                            {renderSection(PopulationResidentWork, 'populationResidentWork', { populationResidentWork: states.data.populationResidentWork, storeInfoRedux })}
+                        </section>
+                        <section className="px-0 py-0">
+                            {renderSection(LocInfoHotPlace, 'locInfoHotPlace', { locInfoHotPlace: states.data.locInfoHotPlace, storeInfoRedux })}
+                        </section>
+                        <section className="px-0 py-0">
+                            {renderSection(CommercialDistrictMainCategoryCount, 'commercialDistrictMainCategory', { commercialDistrictMainCategory: states.data.commercialDistrictMainCategory, storeInfoRedux })}
+                        </section>
+                    </CollapsibleSection>
 
-                    {/* <section className="px-1 py-1">
-                        // {renderSection(CommercialDistirctJScore, 'commercialDistrictJscore', { commercialDistrictJscore: states.data.commercialDistrictJscore, storeInfoRedux })}
-                    </section> */}
-
-
-                    {/* ---요일별 매출평균--- */}
-                    <section className="px-4 py-4">
-                        {renderSection(CommercialDistrictWeekdaySales, 'commercialDistrictWeekdaySales', { commercialDistrictWeekdaySales: states.data.commercialDistrictWeekdaySales, storeInfoRedux })}
-                    </section>
-
-                    {/* ---시간대별 매출평균--- */}
-                    <section className="px-4 py-4">
-                        {renderSection(CommercialDistrictTimeSales, 'commercialDistrictTimeSales', { commercialDistrictTimeSales: states.data.commercialDistrictTimeSales, storeInfoRedux })}
-                    </section>
-
-                    {/* ---우리지역에서 가장 잘되는 곳?--- */}
-                    {/* <section className="px-1 py-1">
-                        {renderSection(CommercialDistrictRisingSales, 'commercialRisingSales', { commercialRisingSales: states.data.commercialRisingSales, storeInfoRedux })}
-                    </section> */}
-
-                    {/* ---매창 근처에는 무엇이 있을까?--- */}
+                    {/* ---매장 근처에는 무엇이 있을까?--- */}
                     {/* <section className="px-1 py-1">
                         {renderSection(LocTourInfo, 'locTourInfo', { locTourInfo: states.data.locTourInfo, storeInfoRedux })}
                     </section> */}

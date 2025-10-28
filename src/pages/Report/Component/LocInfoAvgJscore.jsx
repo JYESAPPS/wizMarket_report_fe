@@ -32,18 +32,18 @@ const LocInfoAvgJscore = ({ locInfoAvgJscore, storeInfoRedux }) => {
         <div className='p-4 bg-[#000000] rounded-md tracking-tight shadow-md shadow-black-500 relative -mt-4'>
             <div className="py-2">
                 <p className='text-white text-4xl pb-1 font-semibold'>
-                    입지 점수 : <span className='text-[#46ff35] text-4xl font-extrabold'>
+                    장사분석 점수 : <span className='text-[#46ff35] text-4xl font-extrabold'>
                         {locInfoAvgJscore.loc_info_j_score_average}p
                     </span>
                 </p>
                 <p className='text-white pb-1'>{city_name} {district_name} {sub_district_name}</p>
                 <p className='text-gray-400 text-xs pb-1'>'전자정부 상권정보' {loc_info_data_ref_date}</p>
-                <p className='text-white text-sm pb-2'>
+                <p className='text-white text-base pb-2'>
                     {getScoreMessage(locInfoAvgJscore.loc_info_j_score_average)}
                 </p>
-                <p className='text-gray-400 text-xs'>
-                    전국기준 = <span className='text-[#5BAB84] text-xs'>100% </span> 
-                    참고 - 서초4동(강남역) = 9.03 / 10
+                <p className='text-gray-400 text-sm'>
+                    전국기준 = <span className='text-[#5BAB84] text-xs'>100%</span>
+                    <span className='ml-5'>참고) 서초4동(강남역) = 9.03 / 10</span>
                 </p>
             </div>
         </div>

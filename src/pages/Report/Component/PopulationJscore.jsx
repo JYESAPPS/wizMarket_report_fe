@@ -7,7 +7,7 @@ import PopulationMetric from './PopulationMetric';
 
 // ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ChartDataLabels);  // 플러그인 등록
 
-const PopulationJscore = ({ population, storeInfoRedux }) => {
+const PopulationJscore = ({ population, storeInfoRedux, adviceOnly = false, hideAdvice = false }) => {
     if (!population) {
         return (
             <div className="p-4 bg-white">
@@ -139,6 +139,22 @@ const PopulationJscore = ({ population, storeInfoRedux }) => {
     //         : '여성과 남성 인구가 동일합니다.';
 
 
+    if (adviceOnly) {
+        return (
+            <div className='bg-white p-4 rounded-lg shadow-md space-y-6'>
+                <div className="pt-4">
+                    {/* <div className="flex justify-center ">
+                        <div className="w-6 h-auto">
+                            <img className='block w-full' src="/assets/component/tip.png" alt="별 이미지" />
+                        </div>
+                    </div> */}
+                    <p className='text-md font-bold py-2'>지역경제 특성에 따른 장사 전략 요약을 확인하세요.</p>
+                    <p className="text-lg" dangerouslySetInnerHTML={{ __html: loc_info_advice.replace(/\n/g, "<br />") }}></p>
+                </div>
+            </div>
+        );
+    }
+
     return (
         <div className='bg-white p-4 rounded-lg shadow-md space-y-6'>
             {/* <div>
@@ -166,17 +182,19 @@ const PopulationJscore = ({ population, storeInfoRedux }) => {
                 </div>
             </div>
 
-            <div className="">
-                <div className="pt-4">
-                    <div className="flex justify-center ">
-                        <div className="w-6 h-auto">
-                            <img className='block w-full' src="/assets/component/tip.png" alt="별 이미지" />
-                        </div>
-                    </div>  
-                    <p className='text-md font-bold py-2'>분석 및 조언</p>
-                    <p className="text-lg" dangerouslySetInnerHTML={{ __html: loc_info_advice.replace(/\n/g, "<br />") }}></p>
+            {!hideAdvice && (
+                <div className="">
+                    <div className="pt-4">
+                        {/* <div className="flex justify-center ">
+                            <div className="w-6 h-auto">
+                                <img className='block w-full' src="/assets/component/tip.png" alt="별 이미지" />
+                            </div>
+                        </div>   */}
+                        <p className='text-md font-bold py-2'>지역경제 특성에 따른 장사 전략 요약을 확인하세요.</p>
+                        <p className="text-lg" dangerouslySetInnerHTML={{ __html: loc_info_advice.replace(/\n/g, "<br />") }}></p>
+                    </div>
                 </div>
-            </div>
+            )}
         </div>
     );
 };
