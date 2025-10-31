@@ -20,14 +20,14 @@ import CommercialDistrictMainCategoryCount from "./Component/CommercialDistrictM
 // import CommercialDistirctJScore from "./Component/CommercialDistirctJScore";
 import CommercialDistrictWeekdaySales from "./Component/CommercialDistrictWeekdaySales";
 import CommercialDistrictTimeSales from "./Component/CommercialDistrictTimeSales";
-//import CommercialDistrictRisingSales from "./Component/CommercialDistrictRisingSales";
+// import CommercialDistrictRisingSales from "./Component/CommercialDistrictRisingSales";
 import LocInfoHotPlace from "./Component/LocInfoHotPlace";
 import RisingBusiness from "./Component/RisingBusiness";
 import AdviceSummary from "./Component/AdviceSummary";
 import CollapsibleSection from "./Component/CollapsibleSection";
-import PlatformPerformanceCard from "./Component/PlatformPerformanceCard";
+// import PlatformPerformanceCard from "./Component/PlatformPerformanceCard";
 import Footer from "./Component/Footer";
-import StoreDescription from "./Component/StoreDescription";
+// import StoreDescription from "./Component/StoreDescription";
 // import StoreCategoryDescription from "./Component/StoreCategoryDescription";
 // import LocTourInfo from "./Component/LocTourInfo";
 // import RoadEventInfo from "./Component/RoadEventInfo";
@@ -560,11 +560,11 @@ const Report = React.memo(() => {
                     </section>
 
                     {/* ---매장 상세정보--- */}
-                    {!states.error.storeDescription && !states.loading.storeDescription && states.data.storeDescription?.length > 0 && (
+                    {/* {!states.error.storeDescription && !states.loading.storeDescription && states.data.storeDescription?.length > 0 && (
                         <section className="px-1 py-1">
                             {renderSection(StoreDescription, 'storeDescription', { storeDescriptions: states.data.storeDescription })}
                         </section>
-                    )}
+                    )} */}
 
                     {/* 조언 요약 섹션(3개 조언을 하나로 묶음) */}
                     <section className="px-4 py-4">
