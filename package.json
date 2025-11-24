@@ -1,6 +1,7 @@
 {
   "name": "test",
   "version": "0.1.0",
+  "homeplage":"/report-view",
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.7",
