@@ -15,7 +15,7 @@ const Router = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/wizmarket/report/:uuid" element={<WizReport />} />
+        <Route path="/report/:uuid" element={<WizReport />} />
       </Routes>
     </BrowserRouter>
   );
