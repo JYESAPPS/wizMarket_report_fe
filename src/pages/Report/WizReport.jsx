@@ -512,7 +512,7 @@ const Report = React.memo(() => {
                         {/* 로고 */}
                         <div className="flex items-center gap-3">
                             <div className="w-28 sm:w-32">
-                                <img src="/assets/component/reportWizLogo.png" alt="Wiz" className="block w-full h-auto" />
+                                <img src={process.env.PUBLIC_URL + "/assets/component/reportWizLogo.png"} alt="Wiz" className="block w-full h-auto" />
                             </div>
                             <span className="text-3xl sm:text-3xl font-normal text-black">
                                 리포트
