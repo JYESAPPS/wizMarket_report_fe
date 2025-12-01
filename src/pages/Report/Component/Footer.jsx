@@ -7,7 +7,7 @@ const Footer = () => {
             <div className="text-center flex flex-col items-center py-4 px-2">
                 <div className="">
                     <h1 className='min-w-[11rem] h-auto py-2'>
-                        <img src="/assets/footer/wizmarket_logo.png" alt="Wiz-Market_logo" className='block w-full h-auto' />
+                        <img src={process.env.PUBLIC_URL + "/assets/footer/wizmarket_logo.png"} alt="Wiz-Market_logo" className='block w-full h-auto' />
                     </h1>
                 </div>
                 <div className='flex justify-between py-2 gap-2 '>
