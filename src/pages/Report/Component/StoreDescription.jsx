@@ -16,7 +16,7 @@ const StoreDescription = ({ storeDescriptions }) => {
         <div className="bg-white p-4 shadow-md shadow-black-500 rounded-lg">
             <div className="flex gap-1 py-2">
                 <div className="w-6 h-6">
-                    <img className='block w-full' src="/assets/component/tip.png" alt="별 이미지" />
+                    <img className='block w-full' src={process.env.PUBLIC_URL + "/assets/component/tip.png"} alt="별 이미지" />
                 </div>
                 <div className="">
                     <p className='text-[#FF1664] font-bold'>매장 정보</p>

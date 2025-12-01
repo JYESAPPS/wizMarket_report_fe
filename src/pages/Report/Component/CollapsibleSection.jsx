@@ -4,7 +4,10 @@ const CollapsibleSection = ({ title, defaultOpen = false, children }) => {
   const [isOpen, setIsOpen] = useState(defaultOpen);
   const contentRef = useRef(null);
   const [contentHeight, setContentHeight] = useState(0);
-  const iconSrc = isOpen ? '/assets/component/up.png' : '/assets/component/down.png';
+  const base = process.env.PUBLIC_URL || '';
+
+  const iconSrc = `${base}/assets/component/${isOpen ? 'up' : 'down'}.png`;
+
 
   useEffect(() => {
     if (contentRef.current) {

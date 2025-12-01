@@ -37,7 +37,7 @@ const RisingMenu = ({ risingMenu, storeInfoRedux }) => {
                 <div className="pt-4">
                     <div className="flex justify-center p-4">
                         <div className="w-6 h-auto">
-                            <img src="/assets/component/tip.png" alt="tip 아이콘이미지" className='block w-full h-auto' />
+                            <img src={process.env.PUBLIC_URL + "/assets/component/tip.png"} alt="tip 아이콘이미지" className='block w-full h-auto' />
                         </div>
                     </div>
                     <p className='font-bold py-2 text-lg'>전문가의 조언 들어보세요~</p>

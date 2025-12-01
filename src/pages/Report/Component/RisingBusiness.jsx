@@ -32,7 +32,7 @@ const RisingBusiness = ({ risingBusiness, storeInfoRedux, adviceOnly = false, hi
             <div className='bg-white p-4 rounded-md tracking-tight shadow-md shadow-black-500'>
                 <div className="flex justify-center">
                     <div className="w-6 h-auto">
-                        <img src="/assets/component/tip.png" alt="팁 이미지" className='block w-full h-auto' />
+                        <img src={process.env.PUBLIC_URL + "/assets/component/tip.png"} alt="팁 이미지" className='block w-full h-auto' />
                     </div>
                 </div>
                 <p className='py-4 font-semibold'>업종 트랜드 분석 및 조언</p>
@@ -99,7 +99,7 @@ const RisingBusiness = ({ risingBusiness, storeInfoRedux, adviceOnly = false, hi
                 <div className="">
                     <div className="flex justify-center">
                         <div className="w-6 h-auto">
-                            <img src="/assets/component/tip.png" alt="팁 이미지" className='block w-full h-auto' />
+                            <img src={process.env.PUBLIC_URL + "/assets/component/tip.png"} alt="팁 이미지" className='block w-full h-auto' />
                         </div>
                     </div>
                     <p className='py-4 font-semibold'>업종 트랜드 분석 및 조언</p>

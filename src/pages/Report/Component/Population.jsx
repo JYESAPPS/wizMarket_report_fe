@@ -145,7 +145,7 @@ const Population = ({ population, storeInfoRedux, adviceOnly = false, hideAdvice
                 <div className="pt-4">
                     <div className="flex justify-center ">
                         <div className="w-6 h-auto">
-                            <img className='block w-full' src="/assets/component/tip.png" alt="별 이미지" />
+                            <img className='block w-full' src={process.env.PUBLIC_URL + "/assets/component/tip.png"} alt="별 이미지" />
                         </div>
                     </div>
                     <p className='text-md font-bold py-2'>연령별 특성 및 응대방법을 제안드립니다.</p>
@@ -188,7 +188,7 @@ const Population = ({ population, storeInfoRedux, adviceOnly = false, hideAdvice
                     <div className="pt-4">
                         <div className="flex justify-center ">
                             <div className="w-6 h-auto">
-                                <img className='block w-full' src="/assets/component/tip.png" alt="별 이미지" />
+                                <img className='block w-full' src={process.env.PUBLIC_URL + "/assets/component/tip.png"} alt="별 이미지" />
                             </div>
                         </div>
                         <p className='text-md font-bold py-2'>연령별 특성 및 응대방법을 제안드립니다.</p>

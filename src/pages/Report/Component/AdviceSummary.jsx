@@ -9,7 +9,7 @@ const AdviceBlock = ({ title, html, showIcon = false }) => {
       {showIcon ? (
         <div className="flex justify-center">
           <div className="w-6 h-auto">
-            <img src="/assets/component/tip.png" alt="팁 이미지" className="block w-full h-auto" />
+            <img src={process.env.PUBLIC_URL + "/assets/component/tip.png"} alt="팁 이미지" className="block w-full h-auto" />
           </div>
         </div>
       ) : (
