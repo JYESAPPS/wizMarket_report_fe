@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import WizReport from "./pages/Report/WizReport";
+//import WizReport from "./pages/Report/WizReport";
+import InfoReport from "./pages/Report/InfoReport";
 
 const Router = () => {
   return (
@@ -8,7 +9,7 @@ const Router = () => {
     <BrowserRouter basename="/report-view">
       <Routes>
         {/* 🔹 실제 URL: /report-view/report/:uuid 이므로 여기 경로는 /report/:uuid */}
-        <Route path="/report/:uuid" element={<WizReport />} />
+        <Route path="/report/:uuid" element={<InfoReport />} />
       </Routes>
     </BrowserRouter>
   );
