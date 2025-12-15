@@ -158,7 +158,8 @@ const Population = ({ population, storeInfoRedux, adviceOnly = false, hideAdvice
     return (
         <div className='bg-white p-4 rounded-lg shadow-md space-y-6'>
             <div>
-                <p className='text-lg font-bold text-opacity-80'>{storeInfoRedux.sub_district_name} 인구분포 <span className='text-xs font-normal text-black text-opacity-70'>{formatDate(nice_biz_map_data_ref_date)} 기준 자료</span></p>
+                <p className='text-lg font-bold text-opacity-80'>{storeInfoRedux.sub_district_name} 인구분포 <span className='text-xs font-normal text-black text-opacity-70'></span></p>
+                {/* {formatDate(nice_biz_map_data_ref_date)} 기준 자료 */}
                 {/* <p className='text-lg text-[#242424]'>
                     총 인구 수 {population_total ? population_total.toLocaleString() : ''}명 중
                     여성 {population_female_percent ? population_female_percent : '데이터 없음'}%,

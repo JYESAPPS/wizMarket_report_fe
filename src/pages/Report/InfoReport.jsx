@@ -160,10 +160,77 @@ const Report = React.memo(() => {
 
     const [storeInfoReceived, setStoreInfoReceived] = useState(false);
 
+    // 오늘 날짜 (한국시간) 키 생성
+    const getKSTDateKey = useCallback(() => {
+        const now = new Date();
+        const utc = now.getTime() + now.getTimezoneOffset() * 60000;
+        return new Date(utc + 9 * 60 * 60 * 1000).toISOString().slice(0, 10);
+    }, []);
+
+    // 캐시 읽기 (자정 이후 무효)
+    const readCache = useCallback((label) => {
+        if (typeof window === 'undefined' || !store_business_id) return null;
+        try {
+            const raw = localStorage.getItem(`wiz_report_${label}_${store_business_id}`);
+            if (!raw) return null;
+
+            const parsed = JSON.parse(raw);
+            return parsed?.date === getKSTDateKey() ? parsed.data : null;
+        } catch (error) {
+            console.warn(`Failed to read cache for ${label}`, error);
+            return null;
+        }
+    }, [store_business_id, getKSTDateKey]);
+
+    // 캐시 저장 (현재 날짜 포함)
+    const writeCache = useCallback((label, data) => {
+        if (typeof window === 'undefined' || !store_business_id) return;
+        try {
+            localStorage.setItem(
+                `wiz_report_${label}_${store_business_id}`,
+                JSON.stringify({ date: getKSTDateKey(), data })
+            );
+        } catch (error) {
+            console.warn(`Failed to write cache for ${label}`, error);
+        }
+    }, [store_business_id, getKSTDateKey]);
+
+    useEffect(() => {
+        if (!store_business_id) return;
+
+        const cacheTargets = [
+            { label: 'population', key: 'population' },
+            { label: 'dailyTip', key: 'dailyTip' },
+            { label: 'trendAdvice', key: 'trendAdvice' },
+        ];
+
+        const nextData = {};
+        const nextLoading = {};
+        let hasCached = false;
+
+        cacheTargets.forEach(({ label, key }) => {
+            const cached = readCache(label);
+            if (cached) {
+                nextData[key] = cached;
+                nextLoading[key] = false;
+                hasCached = true;
+            }
+        });
+
+        if (hasCached) {
+            setStates(prev => ({
+                ...prev,
+                data: { ...prev.data, ...nextData },
+                loading: { ...prev.loading, ...nextLoading },
+            }));
+        }
+    }, [store_business_id, readCache]);
+
     const ENDPOINT_GROUPS = useMemo(() => ({
         essential: [
             {
                 key: 'storeInfoRedux',
+
                 url: `${process.env.REACT_APP_FASTAPI_BASE_URL}/report/store/info/redux`,
                 reduxAction: true
             },
@@ -175,25 +242,40 @@ const Report = React.memo(() => {
             },
             {
                 key: 'population',
-                url: `${process.env.REACT_APP_FASTAPI_BASE_URL}/report/population`
+                url: `${process.env.REACT_APP_FASTAPI_BASE_URL}/report/population`,
+                cacheLabel: 'population'
             },
             {
                 key: 'dailyTip',
-                url: `${process.env.REACT_APP_FASTAPI_BASE_URL}/report/ai/daily-tip`
+                url: `${process.env.REACT_APP_FASTAPI_BASE_URL}/report/ai/daily-tip`,
+                cacheLabel: 'dailyTip'
             },
             {
                 key: 'trendAdvice',
-                url: `${process.env.REACT_APP_FASTAPI_BASE_URL}/report/ai/trend-advice`
+                url: `${process.env.REACT_APP_FASTAPI_BASE_URL}/report/ai/trend-advice`,
+                cacheLabel: 'trendAdvice'
             },
         ],
         secondary: [
         ],
     }), []);
-
+    
     const fetchEndpoint = useCallback(async (endpoint, controller, isMountedRef) => {
         if (!isMountedRef.current) return;
 
         try {
+            if (endpoint.cacheLabel) {
+                const cachedData = readCache(endpoint.cacheLabel);
+                if (cachedData) {
+                    setStates(prev => ({
+                        ...prev,
+                        data: { ...prev.data, [endpoint.key]: cachedData },
+                        loading: { ...prev.loading, [endpoint.key]: false }
+                    }));
+                    return;
+                }
+            }
+
             const response = await axios.get(endpoint.url, {
                 params: { store_business_id },
                 timeout: 60000,
@@ -216,6 +298,10 @@ const Report = React.memo(() => {
                 dispatch(fetchStoreInfo.fulfilled(response.data));
                 setStoreInfoReceived(true);
             } else {
+                if (endpoint.cacheLabel) {
+                    writeCache(endpoint.cacheLabel, response.data);
+                }
+
                 setStates(prev => ({
                     ...prev,
                     data: { ...prev.data, [endpoint.key]: response.data },
@@ -237,7 +323,7 @@ const Report = React.memo(() => {
                 dispatch(fetchStoreInfo.rejected(null, null, error));
             }
         }
-    }, [store_business_id, dispatch, storeInfoRedux, errorHandler]);
+    }, [store_business_id, dispatch, storeInfoRedux, errorHandler, readCache, writeCache]);
 
     const fetchGroupWithDelay = useCallback(async (endpoints, delay = 0, controller, isMountedRef) => {
         if (!isMountedRef.current) return;
@@ -351,12 +437,24 @@ const Report = React.memo(() => {
         return normalized.split(/\n+/).map(line => line.trim()).filter(Boolean);
     };
 
-    const trendAdvice = useMemo(
-        () => parseTrendAdvice(trendAdviceRaw),
-        [parseTrendAdvice, trendAdviceRaw]
+    const renderSpinner = (message = "데이터를 불러오는 중입니다...") => (
+        <div className="flex flex-col items-center justify-center py-8 text-gray-500 gap-4">
+            <div
+                className="w-14 h-14 border-4 border-slate-300 border-t-transparent border-solid rounded-full animate-spin"
+                style={{ borderTopColor: "#111827" }}
+                aria-label="loading spinner"
+            />
+            <p className="text-base text-gray-600">{message}</p>
+        </div>
     );
 
-    const renderTextCard = (title, content, badgeLabel = "INFO") => (
+    const renderTextCard = ({
+        title,
+        content,
+        badgeLabel = "INFO",
+        isLoading = false,
+        loadingMessage = "AI가 콘텐츠를 준비하고 있습니다...",
+    }) => (
         <section className="bg-white rounded-3xl shadow-sm border border-gray-100 p-6 space-y-4">
             <div className="flex items-center gap-2">
                 <span className="inline-flex items-center justify-center text-xs font-semibold text-white bg-black rounded-full px-3 py-1">
@@ -365,7 +463,9 @@ const Report = React.memo(() => {
                 <h2 className="text-lg font-semibold text-gray-900">{title}</h2>
             </div>
 
-            {content ? (
+            {isLoading ? (
+                renderSpinner(loadingMessage)
+            ) : content ? (
                 <div className="space-y-4 text-gray-800 leading-relaxed text-lg">
                     {formatParagraphs(content).map((line, idx) => (
                         <p key={idx}>{line}</p>
@@ -377,22 +477,12 @@ const Report = React.memo(() => {
         </section>
     );
 
-    const renderPromoPlaceholder = () => (
-        <section className="bg-white rounded-3xl shadow-sm border border-gray-100 p-6 space-y-4">
-            <div className="flex items-center gap-2">
-                <span className="inline-flex items-center justify-center text-xs font-semibold text-white bg-black rounded-full px-3 py-1">
-                    AI
-                </span>
-                <h2 className="text-lg font-semibold text-gray-900">AI 홍보 이미지</h2>
-            </div>
-            <p className="text-sm text-gray-500">AI가 생성한 홍보 이미지를 곧 만나보실 수 있어요.</p>
-            <div className="w-full h-48 rounded-2xl border-2 border-dashed border-gray-200 flex items-center justify-center text-gray-300 text-sm">
-                추후 이미지가 추가될 예정입니다.
-            </div>
-        </section>
+    const trendAdvice = useMemo(
+        () => parseTrendAdvice(trendAdviceRaw),
+        [parseTrendAdvice, trendAdviceRaw]
     );
 
-    const renderTrendAdviceCard = () => (
+    const renderTrendAdviceCard = (isLoading = false) => (
         <section className="bg-white rounded-3xl shadow-sm border border-gray-100 p-6 space-y-6">
             <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
@@ -400,20 +490,24 @@ const Report = React.memo(() => {
                     <h2 className="text-lg font-semibold text-gray-900">분석 및 조언</h2>
                 </div>
             </div>
-            <div className="grid grid-cols-1 gap-4">
-                <div className="rounded-2xl bg-gray-50 p-4 space-y-2">
-                    <p className="text-sm font-semibold text-gray-700">분석</p>
-                    {trendAdvice.analysis ? formatParagraphs(trendAdvice.analysis).map((line, idx) => (
-                        <p key={idx} className="text-lg text-gray-800 leading-relaxed">{line}</p>
-                    )) : <p className="text-lg text-gray-400">분석 내용이 없습니다.</p>}
+            {isLoading ? (
+                renderSpinner("분석 및 조언을 생성 중입니다...")
+            ) : (
+                <div className="grid grid-cols-1 gap-4">
+                    <div className="rounded-2xl bg-gray-50 p-4 space-y-2">
+                        <p className="text-xl font-bold text-black">분석</p>
+                        {trendAdvice.analysis ? formatParagraphs(trendAdvice.analysis).map((line, idx) => (
+                            <p key={idx} className="text-lg text-gray-800 leading-relaxed">{line}</p>
+                        )) : <p className="text-lg text-gray-400">분석 내용이 없습니다.</p>}
+                    </div>
+                    <div className="rounded-2xl bg-gray-50 p-4 space-y-2">
+                        <p className="text-xl font-bold text-black">조언</p>
+                        {trendAdvice.recommendation ? formatParagraphs(trendAdvice.recommendation).map((line, idx) => (
+                            <p key={idx} className="text-lg text-gray-800 leading-relaxed">{line}</p>
+                        )) : <p className="text-lg text-gray-400">조언 내용이 없습니다.</p>}
+                    </div>
                 </div>
-                <div className="rounded-2xl bg-gray-50 p-4 space-y-2">
-                    <p className="text-sm font-semibold text-gray-700">조언</p>
-                    {trendAdvice.recommendation ? formatParagraphs(trendAdvice.recommendation).map((line, idx) => (
-                        <p key={idx} className="text-lg text-gray-800 leading-relaxed">{line}</p>
-                    )) : <p className="text-lg text-gray-400">조언 내용이 없습니다.</p>}
-                </div>
-            </div>
+            )}
         </section>
     );
 
@@ -450,7 +544,7 @@ const Report = React.memo(() => {
                         {/* <div className="mt-8">
                             <h2 className="text-lg sm:text-xl font-semibold text-black">마케팅 효과분석</h2>
                             <p className="text-gray-800 text-base sm:text-base mt-2">
-                                wizMarket AI리포트는 AI, 빅데이터를 기반으로 한 자체 마케팅 효과분석 솔루션을 적용하여 마케팅 효과 분석을 제공하고 있습니다.
+                                wizMarket AI리포트는 AI, 빅데이터를 기반으로 한 자체 마케팅 효과분석 솔루션을 적용하여 마케팅 효과 분석을 제공합니다.
                             </p>
                         </div> */}
                     </section>
@@ -459,30 +553,42 @@ const Report = React.memo(() => {
                     {/* <section className="py-4 px-4">
                         <PlatformPerformanceCard />
                     </section> */}
-
+                    {/* ---리포트 본문--- */}
                     <section className="px-4 space-y-6 pb-8">
-                        {renderTextCard("매장 운영 AI 팁!", states.loading.dailyTip ? "" : dailyTip)}
-                        {renderPromoPlaceholder()}
-                        {renderTrendAdviceCard()}
+                        <p className="text-sm text-black px-1">※ WizReport는 매일 재생성됩니다.</p>
+                        {renderTextCard({
+                            title: "매장 운영 AI 팁!",
+                            content: dailyTip,
+                            isLoading: states.loading.dailyTip,
+                            loadingMessage: "매장운영 AI 팁을 생성하고 있습니다...",
+                        })}
+
+                        {/* ai 이미지 챕터 */}
+                        {/* {renderPromoPlaceholder()} */}
+                        {renderTrendAdviceCard(states.loading.trendAdvice)}
 
                         <section className="space-y-4">
                             <h2 className="text-lg font-semibold text-gray-900">지역경제 특성</h2>
                             {renderSection(PopulationJscore, 'population', { population: states.data.population, storeInfoRedux, hideAdvice: true })}
-                            {renderTextCard(
-                                "지역경제 특성 분석",
-                                states.loading.population ? "" : (states.data.population?.loc_info_advice || ""),
-                                "ECONOMY"
-                            )}
+                            {renderTextCard({
+                                title: "지역경제 특성 분석",
+                                badgeLabel: "ECONOMY",
+                                content: states.data.population?.loc_info_advice || "",
+                                isLoading: states.loading.population,
+                                loadingMessage: "지역경제 특성을 분석하고 있습니다...",
+                            })}
                         </section>
 
                         <section className="space-y-4">
                             <h2 className="text-lg font-semibold text-gray-900">연령별 특성 및 응대방법</h2>
-                            {renderTextCard(
-                                "연령별 특성 및 응대방법",
-                                states.loading.population ? "" : (states.data.population?.population_advice || ""),
-                                "TIP"
-                            )}
                             {renderSection(Population, 'population', { population: states.data.population, storeInfoRedux, hideAdvice: true })}
+                            {renderTextCard({
+                                title: "연령별 특성 및 응대방법",
+                                badgeLabel: "TIP",
+                                content: states.data.population?.population_advice || "",
+                                isLoading: states.loading.population,
+                                loadingMessage: "연령별 특성을 분석하고 있습니다...",
+                            })}
                         </section>
 
                         <section className="space-y-4">
